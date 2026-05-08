@@ -1,0 +1,25 @@
+---
+import PricingHighlight from './PricingHighlight';
+
+interface Props {
+  pricing: {
+    title: string;
+    cards: [string, string, string][];
+  };
+}
+
+const { pricing } = Astro.props;
+
+const ICON_KEYS = ['ticket', 'clipboard', 'shield'] as const;
+
+const cards = pricing.cards.map(([cardTitle, price, text], i) => ({
+  title: cardTitle,
+  description: [price, text],
+  iconKey: ICON_KEYS[i],
+}));
+---
+
+<section id="precios" class="pricing section-pad">
+  <h2 class="section-title centered reveal">{pricing.title}</h2>
+  <PricingHighlight cards={cards} client:visible />
+</section>
