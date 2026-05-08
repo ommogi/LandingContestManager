@@ -7,6 +7,9 @@ export default defineConfig({
   site: 'https://contestmanager.app',
   integrations: [sitemap(), react(), tailwind()],
   vite: {
-    assetsInclude: ['**/*.glb', '**/*.png']
+    assetsInclude: ['**/*.glb', '**/*.png'],
+    resolve: {
+      dedupe: ['react', 'react-dom'],
+    },
   }
 });
