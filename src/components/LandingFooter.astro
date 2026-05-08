@@ -1,0 +1,334 @@
+---
+import Lanyard from "./Lanyard/Lanyard.jsx";
+
+interface Props {
+  locale: "es" | "en";
+}
+
+const { locale } = Astro.props;
+
+const links = {
+  es: {
+    company: [
+      { label: "Sobre nosotros", href: "#problema" },
+      { label: "Contacto", href: "#lista-blanca" },
+      { label: "Membresía", href: "#precios" },
+    ],
+    social: [
+      { label: "YouTube", href: "#" },
+      { label: "Instagram", href: "#" },
+      { label: "LinkedIn", href: "#" },
+    ],
+    legal: [
+      { label: "Términos", href: "#" },
+      { label: "Privacidad", href: "#" },
+      { label: "Blog", href: "#" },
+    ],
+  },
+  en: {
+    company: [
+      { label: "About us", href: "#problema" },
+      { label: "Contact", href: "#lista-blanca" },
+      { label: "Membership", href: "#precios" },
+    ],
+    social: [
+      { label: "YouTube", href: "#" },
+      { label: "Instagram", href: "#" },
+      { label: "LinkedIn", href: "#" },
+    ],
+    legal: [
+      { label: "Terms", href: "#" },
+      { label: "Privacy", href: "#" },
+      { label: "Blog", href: "#" },
+    ],
+  },
+}[locale];
+
+const copy =
+  locale === "es"
+    ? {
+        cta: "Entrar en lista blanca",
+        footer:
+          "Concursos musicales más claros, auditables y fáciles de organizar.",
+      }
+    : {
+        cta: "Join the whitelist",
+        footer:
+          "Music competitions that are clearer, auditable and easier to organize.",
+      };
+---
+
+<footer class="footer-fullscreen">
+  <div class="footer-gradient"></div>
+
+  <div class="footer-content">
+    <!-- Links Grid -->
+    <div class="links-grid">
+      <div class="links-column">
+        {
+          links.company.map((link) => (
+            <a href={link.href} class="footer-link">
+              {link.label}
+            </a>
+          ))
+        }
+      </div>
+      <div class="links-column">
+        {
+          links.social.map((link) => (
+            <a href={link.href} class="footer-link">
+              {link.label}
+            </a>
+          ))
+        }
+      </div>
+      <div class="links-column">
+        {
+          links.legal.map((link) => (
+            <a href={link.href} class="footer-link">
+              {link.label}
+            </a>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- CTA Button -->
+    <a href="#lista-blanca" class="footer-cta">{copy.cta}</a>
+  </div>
+
+  <!-- Lanyard Card -->
+  <div class="lanyard-container">
+    <Lanyard client:load position={[0, 2, 22]} gravity={[0, -40, 0]} fov={24} />
+  </div>
+
+  <!-- Big Creative Text -->
+  <div class="big-text-container">
+    <span class="big-text">
+      C<span class="star">✦</span>NT
+    </span>
+    <span class="big-text second-line">EST</span>
+    <span class="big-text third-line">MANAGER</span>
+  </div>
+
+  <!-- Bottom Text -->
+  <div class="footer-bottom">
+    <p>{copy.footer}</p>
+  </div>
+</footer>
+
+<style>
+  .footer-fullscreen {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    background: var(--bg);
+  }
+
+  .footer-gradient {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(
+        ellipse at 20% 80%,
+        rgba(184, 255, 122, 0.15) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        ellipse at 80% 20%,
+        rgba(139, 211, 255, 0.12) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        ellipse at 50% 50%,
+        rgba(184, 255, 122, 0.05) 0%,
+        transparent 70%
+      );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .footer-content {
+    position: relative;
+    z-index: 10;
+    padding: 80px 40px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 40px;
+  }
+
+  .links-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 60px;
+  }
+
+  .links-column {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .footer-link {
+    color: rgba(247, 243, 234, 0.7);
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 400;
+    transition: color 0.2s ease;
+  }
+
+  .footer-link:hover {
+    color: var(--accent);
+  }
+
+  .footer-cta {
+    color: var(--text);
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.2s ease;
+  }
+
+  .footer-cta:hover {
+    color: var(--accent);
+  }
+
+  .lanyard-container {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 5;
+  }
+
+  .big-text-container {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 40px;
+    margin-top: auto;
+    margin-bottom: -20px;
+    overflow: hidden;
+  }
+
+  .big-text {
+    font-family: "Figtree", system-ui, sans-serif;
+    font-weight: 900;
+    font-size: clamp(120px, 18vw, 280px);
+    line-height: 0.85;
+    letter-spacing: -0.04em;
+    color: var(--text);
+    opacity: 0.9;
+    display: block;
+  }
+
+  .big-text.second-line,
+  .big-text.third-line {
+    margin-left: clamp(40px, 8vw, 120px);
+  }
+
+  .star {
+    color: var(--accent);
+    display: inline-block;
+    transform: translateY(-5px);
+    font-size: 0.9em;
+  }
+
+  .footer-bottom {
+    position: relative;
+    z-index: 10;
+    padding: 40px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .footer-bottom p {
+    margin: 0;
+    color: rgba(247, 243, 234, 0.6);
+    font-size: 14px;
+  }
+
+  @media (max-width: 1024px) {
+    .lanyard-container {
+      left: 0;
+      right: 0;
+    }
+
+    .links-grid {
+      gap: 40px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .footer-content {
+      padding: 60px 24px 30px;
+      flex-direction: column;
+    }
+
+    .links-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+      width: 100%;
+    }
+
+    .lanyard-container {
+      position: relative;
+      top: auto;
+      right: auto;
+      width: 100%;
+      height: 450px;
+      order: -1;
+      margin-bottom: 20px;
+    }
+
+    .big-text {
+      font-size: clamp(80px, 15vw, 150px);
+    }
+
+    .big-text-container {
+      padding: 0 24px;
+    }
+
+    .footer-bottom {
+      padding: 24px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .links-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .big-text {
+      font-size: 60px;
+    }
+
+    .big-text.second-line,
+    .big-text.third-line {
+      margin-left: 20px;
+    }
+  }
+</style>
+
+<script>
+  // Add star rotation animation
+  const star = document.querySelector(".star");
+  if (star) {
+    let rotation = 0;
+    function animateStar() {
+      rotation += 0.5;
+      star.style.transform = `translateY(-5px) rotate(${rotation}deg)`;
+      requestAnimationFrame(animateStar);
+    }
+    animateStar();
+  }
+</script>

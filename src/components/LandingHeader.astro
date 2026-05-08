@@ -1,0 +1,46 @@
+---
+import StaggeredMenu from "./StaggeredMenu.jsx";
+
+type Locale = "es" | "en";
+
+interface Props {
+  locale: Locale;
+  copy: {
+    langLabel: string;
+    langHref: string;
+    nav: string[];
+    menu: {
+      title: string;
+      subtitle: string;
+      cta: string;
+    };
+  };
+}
+
+const { copy } = Astro.props;
+const navItems = [
+  { label: copy.nav[0], ariaLabel: copy.nav[0], link: "#problema" },
+  { label: copy.nav[1], ariaLabel: copy.nav[1], link: "#funciones" },
+  { label: copy.nav[2], ariaLabel: copy.nav[2], link: "#flujo" },
+  { label: copy.nav[3], ariaLabel: copy.nav[3], link: "#precios" },
+  { label: copy.nav[4], ariaLabel: copy.nav[4], link: "#faq" },
+  { label: copy.menu.cta, ariaLabel: copy.menu.cta, link: "#lista-blanca" },
+  { label: copy.langLabel, ariaLabel: copy.langLabel, link: copy.langHref },
+];
+---
+
+<StaggeredMenu
+  client:load
+  position="right"
+  items={navItems}
+  displaySocials={false}
+  displayItemNumbering={true}
+  menuButtonColor="#f7f3ea"
+  openMenuButtonColor="#111111"
+  changeMenuColorOnOpen={true}
+  colors={["#b8ff7a", "#8bd3ff"]}
+  accentColor="#5227ff"
+  logoUrl="/contest-manager-logo.png"
+  isFixed={true}
+  closeOnClickAway={true}
+/>
