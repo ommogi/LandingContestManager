@@ -20,6 +20,9 @@ node_modules/
 .vscode/
 .idea/
 
+# Claude Code worktrees (runtime artifacts, not source)
+.claude/worktrees/
+
 # logs
 *.log
 npm-debug.log*
