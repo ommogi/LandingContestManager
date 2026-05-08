@@ -1,0 +1,83 @@
+<svg width="1200" height="820" viewBox="0 0 1200 820" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Outer frame -->
+  <rect width="1200" height="820" rx="44" fill="#0D1118"/>
+  <rect x="34" y="34" width="1132" height="752" rx="34" fill="#121823" stroke="#2A3342"/>
+  <!-- Sidebar -->
+  <rect x="70" y="74" width="210" height="672" rx="24" fill="#0A0E14"/>
+  <circle cx="112" cy="122" r="22" fill="#B8FF7A"/>
+  <rect x="150" y="108" width="86" height="14" rx="7" fill="#F7F3EA"/>
+  <rect x="92" y="186" width="146" height="14" rx="7" fill="#566174"/>
+  <rect x="92" y="228" width="130" height="14" rx="7" fill="#B8FF7A" fill-opacity="0.9"/>
+  <rect x="82" y="220" width="4" height="30" rx="2" fill="#B8FF7A"/>
+  <rect x="92" y="272" width="118" height="14" rx="7" fill="#566174"/>
+  <rect x="92" y="318" width="132" height="14" rx="7" fill="#566174"/>
+  <rect x="92" y="364" width="108" height="14" rx="7" fill="#566174"/>
+  <!-- Top bar -->
+  <rect x="320" y="78" width="320" height="52" rx="16" fill="#0A0E14"/>
+  <rect x="344" y="96" width="160" height="14" rx="7" fill="#F7F3EA"/>
+  <rect x="344" y="116" width="96" height="9" rx="4" fill="#566174"/>
+  <!-- Nueva categoría button -->
+  <rect x="836" y="78" width="250" height="52" rx="16" fill="#B8FF7A"/>
+  <rect x="862" y="98" width="14" height="14" rx="3" fill="#071009"/>
+  <rect x="866" y="102" width="6" height="6" rx="1" fill="#B8FF7A"/>
+  <rect x="884" y="100" width="124" height="12" rx="6" fill="#071009"/>
+  <!-- Section label -->
+  <rect x="320" y="160" width="180" height="22" rx="8" fill="#B8FF7A" fill-opacity="0.1"/>
+  <rect x="334" y="167" width="152" height="8" rx="4" fill="#B8FF7A"/>
+  <!-- Category card 1 - Piano -->
+  <rect x="320" y="200" width="390" height="130" rx="22" fill="#141C28" stroke="#2A3342"/>
+  <rect x="344" y="224" width="10" height="60" rx="5" fill="#B8FF7A"/>
+  <rect x="368" y="224" width="130" height="14" rx="7" fill="#F7F3EA"/>
+  <rect x="368" y="246" width="80" height="10" rx="5" fill="#566174"/>
+  <rect x="368" y="264" width="100" height="10" rx="5" fill="#566174"/>
+  <rect x="616" y="234" width="64" height="22" rx="11" fill="#B8FF7A" fill-opacity="0.15"/>
+  <rect x="626" y="240" width="44" height="10" rx="5" fill="#B8FF7A"/>
+  <rect x="616" y="264" width="64" height="22" rx="11" fill="#263041"/>
+  <rect x="626" y="270" width="44" height="10" rx="5" fill="#566174"/>
+  <!-- Category card 2 - Violín -->
+  <rect x="726" y="200" width="390" height="130" rx="22" fill="#141C28" stroke="#2A3342"/>
+  <rect x="750" y="224" width="10" height="60" rx="5" fill="#8BD3FF"/>
+  <rect x="774" y="224" width="120" height="14" rx="7" fill="#F7F3EA"/>
+  <rect x="774" y="246" width="74" height="10" rx="5" fill="#566174"/>
+  <rect x="774" y="264" width="88" height="10" rx="5" fill="#566174"/>
+  <rect x="1022" y="234" width="64" height="22" rx="11" fill="#8BD3FF" fill-opacity="0.15"/>
+  <rect x="1032" y="240" width="44" height="10" rx="5" fill="#8BD3FF"/>
+  <rect x="1022" y="264" width="64" height="22" rx="11" fill="#263041"/>
+  <rect x="1032" y="270" width="44" height="10" rx="5" fill="#566174"/>
+  <!-- Category card 3 - Canto -->
+  <rect x="320" y="350" width="390" height="130" rx="22" fill="#141C28" stroke="#2A3342"/>
+  <rect x="344" y="374" width="10" height="60" rx="5" fill="#F5C76B"/>
+  <rect x="368" y="374" width="110" height="14" rx="7" fill="#F7F3EA"/>
+  <rect x="368" y="396" width="86" height="10" rx="5" fill="#566174"/>
+  <rect x="368" y="414" width="70" height="10" rx="5" fill="#566174"/>
+  <rect x="616" y="384" width="64" height="22" rx="11" fill="#F5C76B" fill-opacity="0.15"/>
+  <rect x="626" y="390" width="44" height="10" rx="5" fill="#F5C76B"/>
+  <rect x="616" y="414" width="64" height="22" rx="11" fill="#263041"/>
+  <rect x="626" y="420" width="44" height="10" rx="5" fill="#566174"/>
+  <!-- Category card 4 - Guitarra -->
+  <rect x="726" y="350" width="390" height="130" rx="22" fill="#141C28" stroke="#2A3342"/>
+  <rect x="750" y="374" width="10" height="60" rx="5" fill="#B8FF7A" fill-opacity="0.5"/>
+  <rect x="774" y="374" width="128" height="14" rx="7" fill="#F7F3EA"/>
+  <rect x="774" y="396" width="72" height="10" rx="5" fill="#566174"/>
+  <rect x="774" y="414" width="90" height="10" rx="5" fill="#566174"/>
+  <rect x="1022" y="384" width="64" height="22" rx="11" fill="#B8FF7A" fill-opacity="0.1"/>
+  <rect x="1032" y="390" width="44" height="10" rx="5" fill="#566174"/>
+  <rect x="1022" y="414" width="64" height="22" rx="11" fill="#263041"/>
+  <rect x="1032" y="420" width="44" height="10" rx="5" fill="#566174"/>
+  <!-- Stats row -->
+  <rect x="320" y="508" width="238" height="88" rx="22" fill="#0A0E14"/>
+  <rect x="344" y="526" width="72" height="9" rx="4" fill="#566174"/>
+  <rect x="344" y="544" width="52" height="26" rx="8" fill="#B8FF7A" fill-opacity="0.12"/>
+  <rect x="352" y="550" width="36" height="14" rx="6" fill="#B8FF7A"/>
+  <rect x="570" y="508" width="238" height="88" rx="22" fill="#0A0E14"/>
+  <rect x="594" y="526" width="72" height="9" rx="4" fill="#566174"/>
+  <rect x="594" y="544" width="52" height="26" rx="8" fill="#8BD3FF" fill-opacity="0.12"/>
+  <rect x="602" y="550" width="36" height="14" rx="6" fill="#8BD3FF"/>
+  <rect x="820" y="508" width="238" height="88" rx="22" fill="#0A0E14"/>
+  <rect x="844" y="526" width="72" height="9" rx="4" fill="#566174"/>
+  <rect x="844" y="544" width="52" height="26" rx="8" fill="#F5C76B" fill-opacity="0.12"/>
+  <rect x="852" y="550" width="36" height="14" rx="6" fill="#F5C76B"/>
+  <!-- Bottom rows -->
+  <rect x="320" y="626" width="796" height="14" rx="7" fill="#1A2332"/>
+  <rect x="320" y="652" width="480" height="14" rx="7" fill="#1A2332"/>
+</svg>
