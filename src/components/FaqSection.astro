@@ -1,0 +1,64 @@
+---
+interface Props {
+  title: string;
+  faqs: [string, string][];
+}
+
+const { title, faqs } = Astro.props;
+---
+
+<section id="faq" class="faq section-pad">
+  <h2 class="section-title reveal">{title}</h2>
+  <div class="faq-list">
+    {faqs.map(([question, answer]) => (
+      <details class="faq-item">
+        <summary>{question}</summary>
+        <div class="faq-body"><p>{answer}</p></div>
+      </details>
+    ))}
+  </div>
+</section>
+
+<style>
+  .faq-body {
+    overflow: hidden;
+    height: 0;
+  }
+
+  /* fallback when GSAP doesn't run (reduced-motion / no-JS) */
+  @media (prefers-reduced-motion: reduce) {
+    details[open] .faq-body {
+      height: auto;
+    }
+  }
+
+  .faq-body p {
+    padding-top: 14px;
+  }
+
+  .faq-item[open] > summary::after {
+    transform: rotate(45deg);
+  }
+
+  .faq-item summary {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-item summary::after {
+    content: '+';
+    font-size: 1.4rem;
+    font-weight: 300;
+    line-height: 1;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+    color: var(--accent);
+  }
+</style>
