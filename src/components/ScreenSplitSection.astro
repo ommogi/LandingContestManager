@@ -1,0 +1,36 @@
+---
+interface Props {
+  section: {
+    label: string;
+    title: string;
+    body: string;
+  };
+  imageSrc: string;
+  imageAlt: string;
+  reverse?: boolean;
+  cta?: string;
+  isVideo?: boolean;
+}
+
+const { section, imageSrc, imageAlt, reverse = false, cta, isVideo = false } = Astro.props;
+---
+
+<section class:list={['feature-split', { reverse }]} data-reverse={reverse ? '' : undefined}>
+  <div class="feature-split-inner">
+    <div class="feature-split-copy" data-split-copy>
+      <span class="feature-badge reveal">{section.label}</span>
+      <h2 class="feature-split-title reveal">{section.title}</h2>
+      <p class="feature-split-body reveal">{section.body}</p>
+      {cta && <a href="#lista-blanca" class="button split-cta reveal">{cta}</a>}
+    </div>
+    <div class="feature-split-media" data-split-media>
+      {isVideo ? (
+        <video autoplay muted loop playsinline preload="metadata" poster="/mockups/Categorias.png">
+          <source src={imageSrc} type="video/mp4" />
+        </video>
+      ) : (
+        <img src={imageSrc} alt={imageAlt} loading="lazy" />
+      )}
+    </div>
+  </div>
+</section>
