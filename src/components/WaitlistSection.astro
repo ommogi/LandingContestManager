@@ -1,0 +1,41 @@
+---
+interface Props {
+  waitlist: {
+    title: string;
+    body: string;
+    name: string;
+    email: string;
+    org: string;
+    submit: string;
+    success: string;
+  };
+}
+
+const { waitlist } = Astro.props;
+---
+
+<section id="lista-blanca" class="waitlist section-pad">
+  <div class="waitlist-card reveal">
+    <div>
+      <p class="eyebrow">Whitelist</p>
+      <h2 class="section-title">{waitlist.title}</h2>
+      <p class="section-body">{waitlist.body}</p>
+    </div>
+    <form class="waitlist-form" data-waitlist-form>
+      <label>
+        <span>{waitlist.name}</span>
+        <input name="name" type="text" required />
+      </label>
+      <label>
+        <span>{waitlist.email}</span>
+        <input name="email" type="email" required />
+      </label>
+      <label>
+        <span>{waitlist.org}</span>
+        <input name="organization" type="text" required />
+      </label>
+      <button class="button primary" type="submit">{waitlist.submit}</button>
+      <p class="form-status" data-form-status hidden>{waitlist.success}</p>
+    </form>
+  </div>
+</section>
