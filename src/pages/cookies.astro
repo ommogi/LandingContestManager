@@ -1,0 +1,96 @@
+---
+import LandingFooter from '../components/LandingFooter.astro';
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Política de Cookies — ContestManager</title>
+    <meta name="robots" content="noindex, follow" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      :root {
+        --bg: #07090d; --panel: #10141c; --text: #f7f3ea;
+        --muted: #a7adba; --line: rgba(255,255,255,0.12); --accent: #b8ff7a;
+      }
+      body { background: var(--bg); color: var(--text); font-family: "Figtree", sans-serif; line-height: 1.7; }
+      a { color: var(--accent); text-decoration: none; }
+      a:hover { text-decoration: underline; }
+      .topbar { padding: 24px 40px; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 16px; }
+      .topbar-logo { font-family: "Instrument Serif", serif; font-size: 1.2rem; color: var(--text); }
+      .topbar-back { font-size: 0.85rem; color: var(--muted); }
+      .content { max-width: 780px; margin: 0 auto; padding: 64px 40px 96px; }
+      h1 { font-family: "Instrument Serif", serif; font-size: clamp(2rem, 5vw, 3rem); font-weight: 400; letter-spacing: -0.02em; margin-bottom: 8px; }
+      .updated { color: var(--muted); font-size: 0.85rem; margin-bottom: 48px; }
+      h2 { font-size: 1.1rem; font-weight: 700; letter-spacing: -0.01em; margin: 40px 0 12px; color: var(--text); }
+      p { color: var(--muted); margin-bottom: 16px; }
+      table { width: 100%; border-collapse: collapse; margin-bottom: 24px; font-size: 0.9rem; color: var(--muted); }
+      th { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); color: var(--text); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; }
+      td { padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.06); vertical-align: top; }
+      .manage-btn { display: inline-flex; align-items: center; gap: 8px; margin-top: 8px; padding: 10px 24px; border-radius: 999px; background: var(--accent); color: #081009; font-weight: 700; font-size: 0.9rem; border: none; cursor: pointer; text-decoration: none; }
+      .manage-btn:hover { opacity: 0.9; text-decoration: none; }
+      @media (max-width: 600px) { .topbar { padding: 20px; } .content { padding: 48px 20px 80px; } }
+    </style>
+  </head>
+  <body>
+    <div class="topbar">
+      <a href="/" class="topbar-logo">ContestManager</a>
+      <span class="topbar-back">/ <a href="/">Volver al inicio</a></span>
+    </div>
+
+    <main class="content">
+      <h1>Política de Cookies</h1>
+      <p class="updated">Última actualización: <span style="background:rgba(184,255,122,0.08);border:1px dashed rgba(184,255,122,0.3);border-radius:6px;padding:2px 8px;color:var(--accent);font-size:0.9em">[FECHA]</span></p>
+
+      <h2>¿Qué son las cookies?</h2>
+      <p>Las cookies son pequeños archivos de texto que un sitio web almacena en tu dispositivo cuando lo visitas. Permiten que el sitio recuerde tus preferencias y mejore tu experiencia de navegación.</p>
+
+      <h2>Cookies que utilizamos</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Cookie</th>
+            <th>Tipo</th>
+            <th>Finalidad</th>
+            <th>Duración</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>cookie-consent</code></td>
+            <td>Esencial</td>
+            <td>Guarda tus preferencias de cookies para no volverte a preguntar en cada visita</td>
+            <td>Hasta que la borres manualmente</td>
+          </tr>
+          <tr>
+            <td>Cookies analíticas</td>
+            <td>Analítica (opcional)</td>
+            <td>Nos ayudan a entender cómo los usuarios interactúan con el sitio para mejorarlo</td>
+            <td>Hasta que la borres o revoques el consentimiento</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>Las cookies esenciales no requieren tu consentimiento ya que son imprescindibles para el funcionamiento básico del sitio. Las cookies analíticas solo se activan si las aceptas explícitamente.</p>
+
+      <h2>¿Cómo gestionar tus preferencias?</h2>
+      <p>Puedes cambiar tus preferencias de cookies en cualquier momento desde el panel de gestión:</p>
+      <button class="manage-btn" onclick="document.querySelector('.cookie-trigger')?.click()">
+        Gestionar preferencias de cookies
+      </button>
+      <p style="margin-top:16px">También puedes eliminar o bloquear cookies desde la configuración de tu navegador. Ten en cuenta que bloquear todas las cookies puede afectar al funcionamiento del sitio.</p>
+
+      <h2>Cookies de terceros</h2>
+      <p>Actualmente no utilizamos cookies de terceros con fines publicitarios ni de seguimiento entre sitios. Si en el futuro incorporamos servicios de terceros, actualizaremos esta política.</p>
+
+      <h2>Más información</h2>
+      <p>Para cualquier consulta sobre el uso de cookies puedes contactarnos en <span style="background:rgba(184,255,122,0.08);border:1px dashed rgba(184,255,122,0.3);border-radius:6px;padding:2px 8px;color:var(--accent);font-size:0.9em">[EMAIL CONTACTO]</span>.</p>
+    </main>
+
+    <LandingFooter locale="es" />
+  </body>
+</html>

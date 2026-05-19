@@ -1,0 +1,111 @@
+---
+import LandingFooter from '../components/LandingFooter.astro';
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Política de Privacidad — ContestManager</title>
+    <meta name="robots" content="noindex, follow" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      :root {
+        --bg: #07090d; --panel: #10141c; --text: #f7f3ea;
+        --muted: #a7adba; --line: rgba(255,255,255,0.12); --accent: #b8ff7a;
+      }
+      body { background: var(--bg); color: var(--text); font-family: "Figtree", sans-serif; line-height: 1.7; }
+      a { color: var(--accent); text-decoration: none; }
+      a:hover { text-decoration: underline; }
+      .topbar { padding: 24px 40px; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 16px; }
+      .topbar-logo { font-family: "Instrument Serif", serif; font-size: 1.2rem; color: var(--text); }
+      .topbar-back { font-size: 0.85rem; color: var(--muted); }
+      .content { max-width: 780px; margin: 0 auto; padding: 64px 40px 96px; }
+      h1 { font-family: "Instrument Serif", serif; font-size: clamp(2rem, 5vw, 3rem); font-weight: 400; letter-spacing: -0.02em; margin-bottom: 8px; }
+      .updated { color: var(--muted); font-size: 0.85rem; margin-bottom: 48px; }
+      h2 { font-size: 1.1rem; font-weight: 700; letter-spacing: -0.01em; margin: 40px 0 12px; color: var(--text); }
+      p { color: var(--muted); margin-bottom: 16px; }
+      ul { color: var(--muted); margin: 0 0 16px 24px; }
+      li { margin-bottom: 8px; }
+      table { width: 100%; border-collapse: collapse; margin-bottom: 24px; font-size: 0.9rem; color: var(--muted); }
+      th { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); color: var(--text); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; }
+      td { padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.06); vertical-align: top; }
+      .placeholder { background: rgba(184,255,122,0.08); border: 1px dashed rgba(184,255,122,0.3); border-radius: 6px; padding: 2px 8px; color: var(--accent); font-size: 0.9em; }
+      @media (max-width: 600px) { .topbar { padding: 20px; } .content { padding: 48px 20px 80px; } }
+    </style>
+  </head>
+  <body>
+    <div class="topbar">
+      <a href="/" class="topbar-logo">ContestManager</a>
+      <span class="topbar-back">/ <a href="/">Volver al inicio</a></span>
+    </div>
+
+    <main class="content">
+      <h1>Política de Privacidad</h1>
+      <p class="updated">Última actualización: <span class="placeholder">[FECHA]</span></p>
+
+      <h2>1. Responsable del tratamiento</h2>
+      <p>
+        <strong>Identidad:</strong> <span class="placeholder">[RAZÓN SOCIAL]</span><br />
+        <strong>NIF/CIF:</strong> <span class="placeholder">[NIF/CIF]</span><br />
+        <strong>Dirección:</strong> <span class="placeholder">[DIRECCIÓN COMPLETA]</span><br />
+        <strong>Contacto:</strong> <span class="placeholder">[EMAIL CONTACTO]</span>
+      </p>
+
+      <h2>2. Datos que recogemos y con qué finalidad</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Dato</th>
+            <th>Finalidad</th>
+            <th>Base jurídica</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Nombre</td>
+            <td>Identificación en la lista blanca y comunicaciones</td>
+            <td>Consentimiento (art. 6.1.a RGPD)</td>
+          </tr>
+          <tr>
+            <td>Correo electrónico</td>
+            <td>Notificación de disponibilidad del servicio y oferta de descuento del 5%</td>
+            <td>Consentimiento (art. 6.1.a RGPD)</td>
+          </tr>
+          <tr>
+            <td>Organización o asociación</td>
+            <td>Segmentación de comunicaciones y mejora del producto</td>
+            <td>Consentimiento (art. 6.1.a RGPD)</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>No recogemos datos sensibles ni realizamos decisiones automatizadas con impacto legal en el usuario.</p>
+
+      <h2>3. Plazo de conservación</h2>
+      <p>Los datos se conservarán mientras el usuario no solicite su supresión o hasta que el servicio esté disponible y el usuario haya recibido la comunicación correspondiente, momento en que serán eliminados o anonimizados salvo obligación legal en contrario.</p>
+
+      <h2>4. Destinatarios de los datos</h2>
+      <p>Los datos no se ceden a terceros, salvo:</p>
+      <ul>
+        <li><strong>Supabase Inc.</strong> — proveedor de base de datos (alojamiento en la UE o con garantías adecuadas).</li>
+        <li><strong>Resend Inc.</strong> — proveedor de envío de correo electrónico transaccional.</li>
+        <li>Obligación legal o requerimiento de autoridad competente.</li>
+      </ul>
+
+      <h2>5. Derechos del interesado</h2>
+      <p>Puedes ejercer los derechos de acceso, rectificación, supresión, limitación, portabilidad y oposición escribiendo a <span class="placeholder">[EMAIL CONTACTO]</span> con el asunto «Derechos RGPD». Tienes derecho a presentar una reclamación ante la <a href="https://www.aepd.es" target="_blank" rel="noopener">Agencia Española de Protección de Datos (AEPD)</a>.</p>
+
+      <h2>6. Cookies</h2>
+      <p>Para información sobre el uso de cookies, consulta nuestra <a href="/cookies">Política de Cookies</a>.</p>
+
+      <h2>7. Cambios en esta política</h2>
+      <p>Podemos actualizar esta política en cualquier momento. Publicaremos la versión actualizada en esta misma página con la nueva fecha de efectividad.</p>
+    </main>
+
+    <LandingFooter locale="es" />
+  </body>
+</html>
