@@ -1,14 +1,14 @@
 ---
-interface Props {
-  title: string;
-  faqs: [string, string][];
-}
-
-const { title, faqs } = Astro.props;
+const faqs: [string, string][] = [
+  ["¿ContestManager sustituye Excel por completo?",   "Sí. La idea es centralizar el concurso para que Excel deje de ser el sistema principal."],
+  ["¿Puedo importar participantes desde CSV?",         "Sí. Está previsto importar inscripciones desde CSV para facilitar el cambio desde hojas de cálculo."],
+  ["¿Quién decide quién pasa de ronda?",               "El administrador mantiene el control y decide cuándo se pasa de ronda y cuántas personas avanzan."],
+  ["¿Se registran los cambios en puntuaciones?",       "Sí. Las modificaciones relevantes quedan guardadas para poder revisarlas."],
+];
 ---
 
 <section id="faq" class="faq section-pad">
-  <h2 class="section-title reveal">{title}</h2>
+  <h2 class="section-title reveal">Preguntas frecuentes</h2>
   <div class="faq-list">
     {faqs.map(([question, answer]) => (
       <details class="faq-item">

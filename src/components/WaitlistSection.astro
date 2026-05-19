@@ -1,41 +1,74 @@
 ---
-interface Props {
-  waitlist: {
-    title: string;
-    body: string;
-    name: string;
-    email: string;
-    org: string;
-    submit: string;
-    success: string;
-  };
-}
-
-const { waitlist } = Astro.props;
 ---
 
 <section id="lista-blanca" class="waitlist section-pad">
   <div class="waitlist-card reveal">
     <div>
       <p class="eyebrow">Whitelist</p>
-      <h2 class="section-title">{waitlist.title}</h2>
-      <p class="section-body">{waitlist.body}</p>
+      <h2 class="section-title">Entra en la lista blanca</h2>
+      <p class="section-body">Déjanos tus datos y te avisaremos cuando ContestManager esté disponible. Los inscritos recibirán un 5% de descuento en su primera compra.</p>
     </div>
-    <form class="waitlist-form" data-waitlist-form>
+    <form
+      class="waitlist-form"
+      data-waitlist-form
+      data-msg-success="¡Apuntado! Te avisaremos cuando esté disponible."
+      data-msg-duplicate="Este email ya está en la lista."
+      data-msg-error="Algo fue mal. Inténtalo de nuevo."
+    >
       <label>
-        <span>{waitlist.name}</span>
+        <span>Nombre</span>
         <input name="name" type="text" required />
       </label>
       <label>
-        <span>{waitlist.email}</span>
+        <span>Email</span>
         <input name="email" type="email" required />
       </label>
       <label>
-        <span>{waitlist.org}</span>
+        <span>Organización o asociación</span>
         <input name="organization" type="text" required />
       </label>
-      <button class="button primary" type="submit">{waitlist.submit}</button>
-      <p class="form-status" data-form-status hidden>{waitlist.success}</p>
+      <label class="privacy-check">
+        <input type="checkbox" name="privacy" required />
+        <span>He leído y acepto la <a href="/privacidad" target="_blank">Política de privacidad</a></span>
+      </label>
+      <button class="button primary" type="submit">Quiero apuntarme</button>
+      <p class="form-status" data-form-status hidden></p>
     </form>
   </div>
 </section>
+
+<style>
+  .privacy-check {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .privacy-check input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    accent-color: var(--accent, #b8ff7a);
+    cursor: pointer;
+  }
+
+  .privacy-check span {
+    font-size: 0.85rem;
+    color: var(--muted, #a7adba);
+    line-height: 1.5;
+  }
+
+  .privacy-check a {
+    color: var(--accent, #b8ff7a);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+</style>

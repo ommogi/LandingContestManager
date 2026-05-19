@@ -1,31 +1,13 @@
 ---
 import StaggeredMenu from "./StaggeredMenu.jsx";
 
-type Locale = "es" | "en";
-
-interface Props {
-  locale: Locale;
-  copy: {
-    langLabel: string;
-    langHref: string;
-    nav: string[];
-    menu: {
-      title: string;
-      subtitle: string;
-      cta: string;
-    };
-  };
-}
-
-const { copy } = Astro.props;
 const navItems = [
-  { label: copy.nav[0], ariaLabel: copy.nav[0], link: "#problema" },
-  { label: copy.nav[1], ariaLabel: copy.nav[1], link: "#funciones" },
-  { label: copy.nav[2], ariaLabel: copy.nav[2], link: "#flujo" },
-  { label: copy.nav[3], ariaLabel: copy.nav[3], link: "#precios" },
-  { label: copy.nav[4], ariaLabel: copy.nav[4], link: "#faq" },
-  { label: copy.menu.cta, ariaLabel: copy.menu.cta, link: "#lista-blanca" },
-  { label: copy.langLabel, ariaLabel: copy.langLabel, link: copy.langHref },
+  { label: "Problema",                    ariaLabel: "Problema",                    link: "#problema" },
+  { label: "Funciones",                   ariaLabel: "Funciones",                   link: "#funciones" },
+  { label: "Flujo",                       ariaLabel: "Flujo",                       link: "#flujo" },
+  { label: "Precios",                     ariaLabel: "Precios",                     link: "#precios" },
+  { label: "FAQ",                         ariaLabel: "FAQ",                         link: "#faq" },
+  { label: "Apuntarme a la lista blanca", ariaLabel: "Apuntarme a la lista blanca", link: "#lista-blanca" },
 ];
 ---
 
