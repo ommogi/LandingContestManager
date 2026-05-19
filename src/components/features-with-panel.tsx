@@ -12,9 +12,17 @@ interface FeatureItem {
 }
 
 interface FeaturesWithPanelProps {
-  items?: FeatureItem[];
   className?: string;
 }
+
+const ITEMS: FeatureItem[] = [
+  { title: "Categorías flexibles",  description: "Organiza participantes, jurados y rondas por modalidad, edad o nivel.",               content: "/mockups/Categorias.png" },
+  { title: "Jurados y notas",       description: "Introduce, revisa y corrige puntuaciones con medias centralizadas.",                   content: "/mockups/Control_notas.mov" },
+  { title: "Pase de ronda",         description: "Define cuántos participantes avanzan y ejecuta la decisión desde administración.",     content: "/mockups/Pase_de_ronda.png" },
+  { title: "Importación CSV",       description: "Crea inscripciones desde archivos CSV cuando la organización ya tiene datos.",         content: "/mockups/Importacion_CSV.png" },
+  { title: "Ensayos y actuaciones", description: "Asigna hora, sala y ronda para cada ensayo o actuación.",                             content: "/mockups/Ensayos_y_actuaciones.png" },
+  { title: "Calendario global",     description: "Consulta todos los eventos de tus concursos desde una vista ordenada.",               content: "/mockups/Calendario_gobal.png" },
+];
 
 function FeatureMedia({ content, alt }: { content: string | React.ReactNode; alt?: string }) {
   if (typeof content !== 'string') {
@@ -48,10 +56,8 @@ function FeatureMedia({ content, alt }: { content: string | React.ReactNode; alt
   );
 }
 
-export default function FeaturesWithPanel({
-  items = [],
-  className,
-}: FeaturesWithPanelProps) {
+export default function FeaturesWithPanel({ className }: FeaturesWithPanelProps) {
+  const items = ITEMS;
   const [active, setActive] = React.useState(0);
 
   return (
