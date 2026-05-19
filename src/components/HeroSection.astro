@@ -2,46 +2,38 @@
 import { NotificationsList } from './NotificationsList';
 import HeroTitle from './HeroTitle';
 import HeroBackground from './HeroBackground';
-
-interface Props {
-  hero: {
-    eyebrow: string;
-    title: string;
-    highlight: string;
-    body: string;
-    primary: string;
-    secondary: string;
-    note: string;
-  };
-}
-
-const { hero } = Astro.props;
 ---
 
-<section class="hero section-pad">
+<section class="hero">
   <HeroBackground client:only="react" />
-  <div class="hero-content">
-    <div class="hero-copy">
-      <p class="eyebrow reveal">{hero.eyebrow}</p>
-      <HeroTitle title={hero.title} highlight={hero.highlight} heroClass="hero-title reveal" client:load />
-      <p class="hero-body reveal">{hero.body}</p>
-      <div class="hero-actions reveal">
-        <a class="button primary" href="#lista-blanca">{hero.primary}</a>
-        <a class="button secondary" href="#funciones">{hero.secondary}</a>
+  <div class="hero-inner section-pad">
+    <div class="hero-content">
+      <div class="hero-copy">
+        <p class="eyebrow reveal">Concursos musicales, por fin bajo control</p>
+        <HeroTitle
+          title="Deja Excel. Gestiona tu concurso con precisión."
+          highlight="Deja Excel"
+          heroClass="hero-title"
+          client:load
+        />
+        <p class="hero-body reveal">ContestManager centraliza categorías, rondas, jurados, participantes, puntuaciones, ensayos y actuaciones en una plataforma pensada para organizaciones musicales.</p>
+        <div class="hero-actions reveal">
+          <a class="button primary" href="#lista-blanca">Entrar en lista blanca</a>
+        </div>
+        <p class="discount-note reveal">Apúntate ahora y recibe un 5% de descuento en tu primera compra.</p>
       </div>
-      <p class="discount-note reveal">{hero.note}</p>
     </div>
-  </div>
 
-  <div class="hero-mockup-wrap">
-    <div class="device-mockup hero-mockup-main">
-      <img src="/mockups/Concursos.png" alt="Concursos" loading="eager" />
-    </div>
-    <div class="device-mockup hero-mockup-panel-left">
-      <img src="/mockups/Actuacion.png" alt="Actuación" loading="eager" />
-    </div>
-    <div class="device-mockup hero-mockup-panel-right notifications-panel">
-      <NotificationsList client:load />
+    <div class="hero-mockup-wrap">
+      <div class="device-mockup hero-mockup-main">
+        <img src="/mockups/Concursos.png" alt="Concursos" loading="eager" />
+      </div>
+      <div class="device-mockup hero-mockup-panel-left">
+        <img src="/mockups/Actuacion.png" alt="Actuación" loading="eager" />
+      </div>
+      <div class="device-mockup hero-mockup-panel-right notifications-panel">
+        <NotificationsList client:load />
+      </div>
     </div>
   </div>
 </section>

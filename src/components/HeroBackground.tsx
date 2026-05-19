@@ -5,10 +5,10 @@ export default function HeroBackground() {
     <div className="hero-bg-shader" aria-hidden="true">
       <MeshGradient
         style={{ width: "100%", height: "100%" }}
-        colors={["#07090d", "#0d2a18", "#091e2e", "#112b12", "#07090d"]}
-        speed={0.3}
-        distortion={0.75}
-        swirl={0.15}
+        colors={["#07090d", "#0d2a18", "#daf0e2", "#07090d", "#0a1e2e"]}
+        speed={0.35}
+        distortion={0.9}
+        swirl={0.2}
       />
     </div>
   )
