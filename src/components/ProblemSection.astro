@@ -1,32 +1,113 @@
 ---
 import { FeatureCardsGrid } from './FeatureCardsGrid';
-
-interface Props {
-  problem: {
-    title: string;
-    body: string;
-    cards: [string, string][];
-  };
-}
-
-const { problem } = Astro.props;
 ---
 
-<section id="problema" class="problem section-pad">
+<script>
+import { gsap } from "gsap";
+import { SplitText } from "gsap/SplitText";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(SplitText, ScrollTrigger);
+
+document.fonts.ready.then(() => {
+  gsap.set(".problem-title", { opacity: 1 });
+
+  const headlineSplit = SplitText.create(".problem-title", {
+    type: "words",
+    wordsClass: "word++",
+  });
+
+  // Mark the "Excel" word for special box styling
+  headlineSplit.words.forEach((w: Element) => {
+    if (w.textContent?.trim().toLowerCase() === "excel") {
+      w.classList.add("excel-word");
+    }
+  });
+
+  gsap.from(headlineSplit.words, {
+    y: -100,
+    opacity: 0,
+    rotation: "random(-80, 80)",
+    stagger: 0.1,
+    duration: 1,
+    ease: "back",
+    scrollTrigger: {
+      trigger: ".problem-header",
+      start: "top 82%",
+      once: true,
+    },
+  });
+
+  // Lines animation on body text
+  const bodySplit = SplitText.create(".problem-body", { type: "lines" });
+  gsap.set(".problem-body", { opacity: 1 });
+  gsap.from(bodySplit.lines, {
+    y: 40,
+    opacity: 0,
+    duration: 2,
+    ease: "power4",
+    stagger: 0.12,
+    scrollTrigger: {
+      trigger: ".problem-body",
+      start: "top 88%",
+      once: true,
+    },
+  });
+});
+</script>
+
+<section id="problema" class="problem section-pad" style={{
+      background: "radial-gradient(125% 125% at 50% 100%, #000000 40%, #010133 100%)",
+    }}>
+
   <div class="problem-header">
-    <p class="eyebrow reveal">Deja atrás Excel</p>
-    <h2 class="section-title problem-title reveal">{problem.title}</h2>
-    <p class="problem-body reveal">{problem.body}</p>
+    <p class="eyebrow reveal ">Deja atrás Excel</p>
+    <h2 class="section-title problem-title">
+      Cuando el concurso crece, Excel deja de ser suficiente.
+    </h2>
+    <p class="problem-body">
+      Versiones duplicadas, medias editadas sin trazabilidad, horarios repartidos en varios archivos y 
+      decisiones de ronda difíciles de auditar. ContestManager convierte ese proceso en un sistema claro 
+      para organizadores, jurados y participantes.
+    </p>
   </div>
   
-  <div class="reveal">
-    <FeatureCardsGrid cards={problem.cards} client:load />
+
+  <div class="text">
+    <FeatureCardsGrid
+      cards={[
+        ["Sin duplicados", "Una fuente de verdad para cada categoría y ronda."],
+        ["Control administrativo", "El organizador decide cuándo avanzar y cuántos pasan."],
+        ["Historial visible", "Los cambios relevantes quedan registrados para consulta."],
+      ]}
+      client:load
+    />
   </div>
 </section>
 
 <style>
+  .text {
+    color: #dfdcff;
+    font-size: clamp(2rem, 12rem, 5vw);
+    line-height: 1.2;
+    box-sizing: border-box;
+    padding: 5%;
+    width: 100%;
+    text-align: center;
+  }
+  .problem-title {
+    opacity: 0;
+    font-weight: 400;
+    font-size: clamp(1.8rem, 3.5vw, 3.8rem);
+    line-height: 1.2;
+    margin: 16px 0 24px;
+  }
+
   .problem {
     text-align: center;
+    width: 100%;
+    max-width: 100%;
+    padding-left: 24px;
+    padding-right: 24px;
   }
 
   .problem-header {
@@ -34,21 +115,38 @@ const { problem } = Astro.props;
     margin: 0 auto 48px;
   }
 
-  .problem-title {
-    font-size: clamp(2rem, 4vw, 3.5rem);
-    margin: 16px 0 24px;
-    line-height: 1.1;
-  }
-
   .problem-body {
     font-size: 1.1rem;
     line-height: 1.7;
     color: var(--muted);
+    opacity: 0;
+  }
+
+  .eyebrow {
+    color: #818cf8;
   }
 
   @media (max-width: 768px) {
     .problem-title {
       font-size: clamp(1.75rem, 6vw, 2.5rem);
     }
+  }
+</style>
+
+<style is:global>
+  /* Applied dynamically by JS after SplitText splits */
+  .excel-word {
+    border: 1.5px dashed rgba(255, 255, 255, 0.25);
+    background-image: radial-gradient( 129.03% 100% at 120.97% 81.45%, #e8f4d9 27.08%, #8fc660 100% );
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+    background-clip: text;
+    padding: 0.25rem 0.6rem;
+    border-radius: 8px;
+    margin: 0.15rem;
+    display: inline-block;
   }
 </style>
