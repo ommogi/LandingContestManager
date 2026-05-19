@@ -1,382 +1,29 @@
 ---
+import CookieConsent from "./CookieConsent.astro";
 import FaqSection from "./FaqSection.astro";
 import FeaturesWithPanel from "./features-with-panel.tsx";
-import FlowSection from "./FlowSection.astro";
+import FlowPanelsSection from "./FlowPanelsSection.astro";
 import HeroSection from "./HeroSection.astro";
 import LandingFooter from "./LandingFooter.astro";
 import LandingHeader from "./LandingHeader.astro";
 import PricingSection from "./PricingSection.astro";
 import ProblemSection from "./ProblemSection.astro";
 import ScreenSplitSection from "./ScreenSplitSection.astro";
-import ScrollTextSection from "./ScrollTextSection.astro";
 import WaitlistSection from "./WaitlistSection.astro";
+import 'animate.css';
 
-type Locale = "es" | "en";
-
-const { locale = "es" } = Astro.props as { locale?: Locale };
-
-const copy = {
-  es: {
-    metaTitle: "ContestManager | Concursos musicales sin Excel",
-    metaDescription:
-      "ContestManager ayuda a organizaciones musicales a gestionar concursos, rondas, jurados, participantes, ensayos y actuaciones sin depender de Excel.",
-    langLabel: "English",
-    langHref: "/en/",
-    nav: ["Problema", "Funciones", "Flujo", "Precios", "FAQ"],
-    menu: {
-      title: "ContestManager",
-      subtitle: "Gestión precisa para concursos musicales.",
-      cta: "Apuntarme a la lista blanca",
-    },
-    hero: {
-      eyebrow: "Concursos musicales, por fin bajo control",
-      title: "Deja Excel. Gestiona tu concurso con precisión.",
-      highlight: "Deja Excel",
-      body: "ContestManager centraliza categorías, rondas, jurados, participantes, puntuaciones, ensayos y actuaciones en una plataforma pensada para organizaciones musicales.",
-      primary: "Entrar en lista blanca",
-      secondary: "Ver funcionalidades",
-      note: "Apúntate ahora y recibe un 5% de descuento en tu primera compra.",
-    },
-    problem: {
-      title: "Cuando el concurso crece, Excel deja de ser suficiente.",
-      body: "Versiones duplicadas, medias editadas sin trazabilidad, horarios repartidos en varios archivos y decisiones de ronda difíciles de auditar. ContestManager convierte ese proceso en un sistema claro para organizadores, jurados y participantes.",
-      cards: [
-        ["Sin duplicados", "Una fuente de verdad para cada categoría y ronda."],
-        [
-          "Control administrativo",
-          "El organizador decide cuándo avanzar y cuántos pasan.",
-        ],
-        [
-          "Historial visible",
-          "Los cambios relevantes quedan registrados para consulta.",
-        ],
-      ],
-    },
-    scrollText:
-      "Llevas años organizando concursos con Excel. Puntuaciones que se borran. Versiones que se duplican. Ese caos tiene un coste real.",
-    featuresTitle:
-      "Todo lo que necesita una organización musical para competir sin caos.",
-    features: [
-      [
-        "Categorías flexibles",
-        "Organiza participantes, jurados y rondas por modalidad, edad o nivel.",
-      ],
-      [
-        "Jurados y notas",
-        "Introduce, revisa y corrige puntuaciones con medias centralizadas.",
-      ],
-      [
-        "Pase de ronda",
-        "Define cuántos participantes avanzan y ejecuta la decisión desde administración.",
-      ],
-      [
-        "Importación CSV",
-        "Crea inscripciones desde archivos CSV cuando la organización ya tiene datos.",
-      ],
-      [
-        "Ensayos y actuaciones",
-        "Asigna hora, sala y ronda para cada ensayo o actuación.",
-      ],
-      [
-        "Calendario global",
-        "Consulta todos los eventos de tus concursos desde una vista ordenada.",
-      ],
-    ],
-    flow: {
-      title: "Un flujo diseñado para el ritmo real de un concurso.",
-      steps: [
-        [
-          "01",
-          "Crea el concurso",
-          "Define la estructura general y las categorías.",
-        ],
-        [
-          "02",
-          "Carga participantes",
-          "Crea inscripciones o importa datos mediante CSV.",
-        ],
-        [
-          "03",
-          "Asigna jurados",
-          "Configura quién evalúa cada categoría y ronda.",
-        ],
-        [
-          "04",
-          "Gestiona rondas",
-          "Controla puntuaciones, medias y pases de ronda.",
-        ],
-        [
-          "05",
-          "Ordena el calendario",
-          "Programa ensayos y actuaciones con lugar y hora.",
-        ],
-      ],
-    },
-    categories: {
-      label: "Categorías",
-      title: "Estructura el concurso exactamente como lo necesitas.",
-      body: "Crea categorías por modalidad, edad o nivel. Cada una tiene sus propias rondas, jurados asignados y participantes inscritos. Sin mezclas ni confusión.",
-    },
-    judges: {
-      label: "Jurados y puntuaciones",
-      title: "Las notas, bajo control desde el primer ensayo.",
-      body: "Asigna jurados por categoría, introduce puntuaciones y consulta medias en tiempo real. Cada ajuste queda registrado para mantener la transparencia durante todo el concurso.",
-    },
-    audit: {
-      label: "Auditoría",
-      title: "Modificar una nota no debería significar perder confianza.",
-      body: "El administrador puede ajustar puntuaciones y medias cuando sea necesario, pero los cambios quedan guardados para saber qué se modificó y mantener transparencia durante el concurso.",
-    },
-    calendar: {
-      label: "Calendario",
-      title: "Ensayos y actuaciones, visibles en un solo lugar.",
-      body: "Cada ronda puede tener sus propios ensayos y actuaciones, con hora y ubicación. El organizador ve el calendario completo sin cruzar hojas de cálculo ni mensajes sueltos.",
-    },
-    pricing: {
-      title: "Pay as you go, pensado para concursos de cualquier tamaño.",
-      cards: [
-        [
-          "Tickets",
-          "1 euro por ticket",
-          "Cada inscripción creada o importada mediante CSV consume un ticket.",
-        ],
-        [
-          "Inscripciones gestionadas",
-          "5% por inscripción",
-          "Si usas la gestión de inscripciones de la aplicación, pagas una comisión del 5%.",
-        ],
-        [
-          "Lista blanca",
-          "5% de descuento",
-          "Los primeros interesados reciben un 5% de descuento en su primera compra.",
-        ],
-      ],
-    },
-    faqTitle: "Preguntas frecuentes",
-    faqs: [
-      [
-        "¿ContestManager sustituye Excel por completo?",
-        "Sí. La idea es centralizar el concurso para que Excel deje de ser el sistema principal.",
-      ],
-      [
-        "¿Puedo importar participantes desde CSV?",
-        "Sí. Está previsto importar inscripciones desde CSV para facilitar el cambio desde hojas de cálculo.",
-      ],
-      [
-        "¿Quién decide quién pasa de ronda?",
-        "El administrador mantiene el control y decide cuándo se pasa de ronda y cuántas personas avanzan.",
-      ],
-      [
-        "¿Se registran los cambios en puntuaciones?",
-        "Sí. Las modificaciones relevantes quedan guardadas para poder revisarlas.",
-      ],
-    ],
-    waitlist: {
-      title: "Entra en la lista blanca",
-      body: "Déjanos tus datos y te avisaremos cuando ContestManager esté disponible. Los inscritos recibirán un 5% de descuento en su primera compra.",
-      name: "Nombre",
-      email: "Email",
-      org: "Organización o asociación",
-      submit: "Quiero apuntarme",
-      success:
-        "Solicitud preparada. Conecta este formulario a tu backend para guardar interesados.",
-    },
-    footer:
-      "Concursos musicales más claros, auditables y fáciles de organizar.",
-  },
-  en: {
-    metaTitle: "ContestManager | Music competitions without spreadsheets",
-    metaDescription:
-      "ContestManager helps music organizations manage competitions, rounds, judges, participants, rehearsals and performances without relying on spreadsheets.",
-    langLabel: "Español",
-    langHref: "/",
-    nav: ["Problem", "Features", "Flow", "Pricing", "FAQ"],
-    menu: {
-      title: "ContestManager",
-      subtitle: "Precise management for music competitions.",
-      cta: "Join the whitelist",
-    },
-    hero: {
-      eyebrow: "Music competitions, finally under control",
-      title:
-        "Leave spreadsheets for scores. Run your competition with precision.",
-      highlight: "Leave spreadsheets for scores",
-      body: "ContestManager centralizes categories, rounds, judges, participants, scores, rehearsals and performances in one platform built for music organizations.",
-      primary: "Join the whitelist",
-      secondary: "Explore features",
-      note: "Join now and get 5% off your first purchase.",
-    },
-    problem: {
-      title: "When the competition grows, spreadsheets stop being enough.",
-      body: "Duplicate versions, score averages edited without traceability, schedules split across files and round decisions that are hard to audit. ContestManager turns that process into a clear system for organizers, judges and participants.",
-      cards: [
-        ["No duplicates", "One source of truth for each category and round."],
-        [
-          "Admin control",
-          "The organizer decides when to advance and how many continue.",
-        ],
-        ["Visible history", "Relevant changes are stored for later review."],
-      ],
-    },
-    scrollText:
-      "You have been running competitions with spreadsheets for years. Scores that disappear. Versions that multiply. Judges asking for the same file over and over. That chaos has a real cost. ContestManager eliminates it.",
-    featuresTitle:
-      "Everything a music organization needs to compete without chaos.",
-    features: [
-      [
-        "Flexible categories",
-        "Organize participants, judges and rounds by discipline, age or level.",
-      ],
-      [
-        "Judges and scores",
-        "Enter, review and adjust scores with centralized averages.",
-      ],
-      [
-        "Round advancement",
-        "Define how many participants advance and execute the decision as admin.",
-      ],
-      [
-        "CSV import",
-        "Create registrations from CSV files when your organization already has data.",
-      ],
-      [
-        "Rehearsals and performances",
-        "Assign time, room and round for every rehearsal or performance.",
-      ],
-      [
-        "Global calendar",
-        "View every event across your competitions from one organized calendar.",
-      ],
-    ],
-    flow: {
-      title: "A workflow designed for the real rhythm of a competition.",
-      steps: [
-        [
-          "01",
-          "Create the competition",
-          "Define the general structure and categories.",
-        ],
-        [
-          "02",
-          "Load participants",
-          "Create registrations or import data via CSV.",
-        ],
-        [
-          "03",
-          "Assign judges",
-          "Configure who evaluates each category and round.",
-        ],
-        [
-          "04",
-          "Manage rounds",
-          "Control scores, averages and round advancement.",
-        ],
-        [
-          "05",
-          "Organize the calendar",
-          "Schedule rehearsals and performances with place and time.",
-        ],
-      ],
-    },
-    categories: {
-      label: "Categories",
-      title: "Structure the competition exactly the way you need it.",
-      body: "Create categories by discipline, age or level. Each one has its own rounds, assigned judges and registered participants. No overlap, no confusion.",
-    },
-    judges: {
-      label: "Judges & scores",
-      title: "Scores, under control from the very first note.",
-      body: "Assign judges per category, enter scores and track averages in real time. Every adjustment is logged automatically to keep the competition fully transparent.",
-    },
-    audit: {
-      label: "Audit trail",
-      title: "Changing a score should not mean losing trust.",
-      body: "Admins can adjust scores and averages when needed, while changes are stored so the organization knows what changed and keeps the competition transparent.",
-    },
-    calendar: {
-      label: "Calendar",
-      title: "Rehearsals and performances, visible in one place.",
-      body: "Each round can have its own rehearsals and performances with time and location. Organizers see the full calendar without crossing spreadsheets or scattered messages.",
-    },
-    pricing: {
-      title: "Pay as you go, built for competitions of any size.",
-      cards: [
-        [
-          "Tickets",
-          "1 euro per ticket",
-          "Each registration created or imported via CSV consumes one ticket.",
-        ],
-        [
-          "Managed registrations",
-          "5% per registration",
-          "If you use the app registration management, you pay a 5% commission.",
-        ],
-        [
-          "Whitelist",
-          "5% discount",
-          "Early interested organizations get 5% off their first purchase.",
-        ],
-      ],
-    },
-    faqTitle: "Frequently asked questions",
-    faqs: [
-      [
-        "Does ContestManager fully replace spreadsheets?",
-        "Yes. The goal is to centralize the competition so spreadsheets are no longer the main system.",
-      ],
-      [
-        "Can I import participants from CSV?",
-        "Yes. CSV import is planned to make the transition from spreadsheets easier.",
-      ],
-      [
-        "Who decides who advances to the next round?",
-        "The administrator stays in control and decides when to advance rounds and how many people continue.",
-      ],
-      [
-        "Are score changes recorded?",
-        "Yes. Relevant changes are stored so they can be reviewed later.",
-      ],
-    ],
-    waitlist: {
-      title: "Join the whitelist",
-      body: "Leave your details and we will notify you when ContestManager is available. Subscribers get 5% off their first purchase.",
-      name: "Name",
-      email: "Email",
-      org: "Organization or association",
-      submit: "Join now",
-      success:
-        "Request prepared. Connect this form to your backend to store interested users.",
-    },
-    footer:
-      "Music competitions that are clearer, auditable and easier to organize.",
-  },
-}[locale];
-
-const panelItems = copy.features.map(([title, description], i) => {
-  const mediaMap = [
-    "/mockups/Categorias.png",
-    "/mockups/Control_notas.mov",
-    "/mockups/Pase_de_ronda.png",
-    "/mockups/Importacion_CSV.png",
-    "/mockups/Ensayos_y_actuaciones.png",
-    "/mockups/Calendario_gobal.png",
-  ];
-  return { title, content: mediaMap[i] || "", description };
-});
-
-const lang = locale === "es" ? "es" : "en";
 ---
 
 <!doctype html>
-<html lang={lang}>
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{copy.metaTitle}</title>
-    <meta name="description" content={copy.metaDescription} />
-    <link rel="canonical" href={locale === "es" ? "/" : "/en/"} />
-    <link rel="alternate" hreflang="es" href="/" />
-    <link rel="alternate" hreflang="en" href="/en/" />
+    <title>ContestManager | Concursos musicales sin Excel</title>
+    <link rel="icon" type="image/svg+xml" href="/contestmanager-logo.svg" />
+    <link rel="icon" type="image/png" href="/contest-manager-logo.png" />
+    <meta name="description" content="ContestManager ayuda a organizaciones musicales a gestionar concursos, rondas, jurados, participantes, ensayos y actuaciones sin depender de Excel." />
+    <link rel="canonical" href="/" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -386,61 +33,70 @@ const lang = locale === "es" ? "es" : "en";
   </head>
   <body>
     <div class="noise" aria-hidden="true"></div>
-    <div class="scroll-progress" aria-hidden="true"></div>
     <div class="cursor-dot" aria-hidden="true"></div>
 
-    <LandingHeader locale={locale} copy={copy} />
+    <LandingHeader />
 
     <main>
-      <HeroSection hero={copy.hero} />
-      <ProblemSection problem={copy.problem} />
-      <ScrollTextSection text={copy.scrollText} />
-      <section class="section-pad">
-        <h2 class="section-title centered reveal">{copy.featuresTitle}</h2>
-        <FeaturesWithPanel items={panelItems} client:only="react" />
+      <HeroSection />
+      <ProblemSection />
+      <section class="section-pad features" style={{
+        background: "radial-gradient(125% 125% at 50% 10%, #000000 40%, #0d1a36 100%)",
+      }}>
+        <h2 class="section-title features-section-title centered">
+          Todo lo que necesita una organización musical para competir sin <span class="features-highlight">caos</span>.
+        </h2>
+        <FeaturesWithPanel client:only="react" />
       </section>
       <ScreenSplitSection
-        section={copy.categories}
+        section={{ label: "Categorías", title: "Estructura el concurso exactamente como lo necesitas.", body: "Crea categorías por modalidad, edad o nivel. Cada una tiene sus propias rondas, jurados asignados y participantes inscritos. Sin mezclas ni confusión." }}
         imageSrc="/mockups/Creacion_concurso.mov"
         imageAlt="Creación de concurso"
-        cta={copy.hero.primary}
+        cta="Entrar en lista blanca"
         isVideo
       />
       <ScreenSplitSection
-        section={copy.judges}
+        section={{ label: "Jurados y puntuaciones", title: "Las notas, bajo control desde el primer ensayo.", body: "Asigna jurados por categoría, introduce puntuaciones y consulta medias en tiempo real. Cada ajuste queda registrado para mantener la transparencia durante todo el concurso." }}
         imageSrc="/mockups/Control_notas.mov"
         imageAlt="Control de notas"
         reverse
-        cta={copy.hero.primary}
+        cta="Entrar en lista blanca"
         isVideo
       />
-      <FlowSection flow={copy.flow} />
+      <FlowPanelsSection />
       <ScreenSplitSection
-        section={copy.audit}
+        section={{ label: "Auditoría", title: "Modificar una nota no debería significar perder confianza.", body: "El administrador puede ajustar puntuaciones y medias cuando sea necesario, pero los cambios quedan guardados para saber qué se modificó y mantener transparencia durante el concurso." }}
         imageSrc="/screens/audit.svg"
         imageAlt="Audit trail placeholder"
-        cta={copy.hero.primary}
+        cta="Entrar en lista blanca"
       />
       <ScreenSplitSection
-        section={copy.calendar}
+        section={{ label: "Calendario", title: "Ensayos y actuaciones, visibles en un solo lugar.", body: "Cada ronda puede tener sus propios ensayos y actuaciones, con hora y ubicación. El organizador ve el calendario completo sin cruzar hojas de cálculo ni mensajes sueltos." }}
         imageSrc="/screens/calendar.svg"
         imageAlt="Calendar placeholder"
         reverse
-        cta={copy.hero.primary}
+        cta="Entrar en lista blanca"
       />
-      <PricingSection pricing={copy.pricing} />
-      <FaqSection title={copy.faqTitle} faqs={copy.faqs} />
-      <WaitlistSection waitlist={copy.waitlist} />
+      <PricingSection />
+      <FaqSection />
+      <WaitlistSection />
     </main>
 
-    <LandingFooter locale={locale} />
+    <LandingFooter />
+
+    <CookieConsent />
 
     <script>
       import { gsap } from "gsap";
       import { ScrollTrigger } from "gsap/ScrollTrigger";
+      import { CustomEase } from "gsap/CustomEase";
+      import { SplitText } from "gsap/SplitText";
       import Lenis from "lenis";
 
-      gsap.registerPlugin(ScrollTrigger);
+      gsap.registerPlugin(ScrollTrigger, CustomEase, SplitText);
+
+      // spring-scale-in: cubic-bezier(0.34, 1.56, 0.64, 1) — y2>1 = spring overshoot
+      CustomEase.create("springScaleIn", "M0,0 C0.34,1.56,0.64,1,1,1");
 
       const lenis = new Lenis({
         duration: 1.2,
@@ -456,22 +112,45 @@ const lang = locale === "es" ? "es" : "en";
 
       gsap.ticker.lagSmoothing(0);
 
+      // ── Animated anchor scroll (GSAP-style via Lenis) ────────────────────────
+      document.addEventListener("click", (e) => {
+        const anchor = (e.target as Element).closest('a[href^="#"]');
+        if (!anchor) return;
+
+        const href = anchor.getAttribute("href");
+        if (!href || href === "#") return;
+
+        const target = document.querySelector(href);
+        if (!target) return;
+
+        e.preventDefault();
+
+        lenis.scrollTo(target as HTMLElement, {
+          offset: -72,
+          duration: 1.4,
+          easing: (t: number) =>
+            t < 0.5
+              ? 8 * t * t * t * t
+              : 1 - Math.pow(-2 * t + 2, 4) / 2,
+        });
+
+        gsap.fromTo(
+          target,
+          { boxShadow: "inset 0 0 0px rgba(184,255,122,0)" },
+          {
+            boxShadow: "inset 0 0 60px rgba(184,255,122,0.08)",
+            duration: 0.4,
+            ease: "power2.out",
+            yoyo: true,
+            repeat: 1,
+          }
+        );
+      });
+
       window.addEventListener("load", () => {
         const reducedMotion = window.matchMedia(
           "(prefers-reduced-motion: reduce)",
         ).matches;
-
-        // ── Scroll progress bar (always active) ─────────────────────────
-        gsap.to(".scroll-progress", {
-          scaleX: 1,
-          ease: "none",
-          scrollTrigger: {
-            trigger: document.documentElement,
-            start: "top top",
-            end: "bottom bottom",
-            scrub: 0.25,
-          },
-        });
 
         if (!reducedMotion) {
           // ── Cursor glow dot ──────────────────────────────────────────
@@ -493,7 +172,23 @@ const lang = locale === "es" ? "es" : "en";
             });
           }
 
-          // ── Hero: dramatic entrance timeline ─────────────────────────
+          // ── Hero title: spring-scale-in per-word ─────────────────────
+          // Word spans are React-rendered by HeroTitle.tsx — no DOM mutation.
+          gsap.set(".hero-title", { opacity: 1 });
+          gsap.fromTo(
+            ".hero-title .text-animation-unit",
+            { opacity: 0, scale: 0.7 },
+            {
+              opacity: 1,
+              scale: 1,
+              duration: 0.35,
+              ease: "springScaleIn",
+              stagger: 0.08,
+              delay: 0.5,
+            },
+          );
+
+          // ── Hero: entrance timeline (other elements) ──────────────────
           const heroTl = gsap.timeline({ delay: 0.15 });
           heroTl
             .fromTo(
@@ -501,12 +196,7 @@ const lang = locale === "es" ? "es" : "en";
               { x: -28, opacity: 0 },
               { x: 0, opacity: 1, duration: 0.55, ease: "power3.out" },
             )
-            .fromTo(
-              ".hero-title",
-              { y: 64, opacity: 0, rotateX: 7 },
-              { y: 0, opacity: 1, rotateX: 0, duration: 0.95, ease: "power3.out" },
-              "-=0.2",
-            )
+            .to({}, { duration: 0.95 }, "-=0.2") // ghost slot — hero-title handled above
             .fromTo(
               ".hero-body",
               { y: 28, opacity: 0, filter: "blur(5px)" },
@@ -558,7 +248,7 @@ const lang = locale === "es" ? "es" : "en";
             });
           });
 
-          // ── Problem: header + cards staggered ────────────────────────
+          // ── Problem: header reveals (eyebrow + body, not title) ──────
           gsap.fromTo(
             ".problem-header .reveal",
             { y: 20, opacity: 0 },
@@ -568,6 +258,8 @@ const lang = locale === "es" ? "es" : "en";
               scrollTrigger: { trigger: ".problem-header", start: "top 85%" },
             },
           );
+
+
           gsap.fromTo(
             ".glass-card",
             { y: 44, opacity: 0, scale: 0.95 },
@@ -770,14 +462,69 @@ const lang = locale === "es" ? "es" : "en";
         }
 
         // ── Waitlist form submit ─────────────────────────────────────────
-        document
-          .querySelector("[data-waitlist-form]")
-          ?.addEventListener("submit", (event) => {
-            event.preventDefault();
-            document
-              .querySelector("[data-form-status]")
-              ?.removeAttribute("hidden");
-          });
+        const waitlistForm = document.querySelector("[data-waitlist-form]");
+        waitlistForm?.addEventListener("submit", async (event) => {
+          event.preventDefault();
+          const form = event.currentTarget as HTMLFormElement;
+          const status = form.querySelector("[data-form-status]") as HTMLElement;
+          const submitBtn = form.querySelector("button[type=submit]") as HTMLButtonElement;
+
+          submitBtn.disabled = true;
+          const originalText = submitBtn.textContent ?? "";
+          submitBtn.textContent = "…";
+
+          const data = Object.fromEntries(new FormData(form));
+
+          try {
+            const res = await fetch("/api/waitlist", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(data),
+            });
+
+            const json = await res.json();
+
+            if (res.ok) {
+              status.textContent = form.dataset.msgSuccess ?? "Done!";
+              status.style.color = "";
+              status.removeAttribute("hidden");
+              form.reset();
+            } else {
+              const isDuplicate = json.error === "already_registered";
+              status.textContent = isDuplicate
+                ? (form.dataset.msgDuplicate ?? "Already registered.")
+                : (form.dataset.msgError ?? "Error. Try again.");
+              status.style.color = "var(--accent, #b8ff7a)";
+              status.removeAttribute("hidden");
+              submitBtn.disabled = false;
+              submitBtn.textContent = originalText;
+            }
+          } catch {
+            status.textContent = form.dataset.msgError ?? "Error. Try again.";
+            status.style.color = "var(--accent, #b8ff7a)";
+            status.removeAttribute("hidden");
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
+          }
+        });
+      });
+
+      // ── Features title: SplitText chars slide-in ────────────────
+      document.fonts.ready.then(() => {
+        gsap.set(".features-section-title", { opacity: 1 });
+        const featuresSplit = SplitText.create(".features-section-title", { type: "chars,words" });
+        gsap.from(featuresSplit.chars, {
+          x: 150,
+          opacity: 0,
+          duration: 0.7,
+          ease: "power4",
+          stagger: 0.04,
+          scrollTrigger: {
+            trigger: ".features-section-title",
+            start: "top 85%",
+            once: true,
+          },
+        });
       });
     </script>
   </body>
@@ -826,7 +573,6 @@ const lang = locale === "es" ? "es" : "en";
   }
 
   html {
-    scroll-behavior: smooth;
   }
 
   body {
@@ -914,24 +660,6 @@ const lang = locale === "es" ? "es" : "en";
     mix-blend-mode: overlay;
   }
 
-  .scroll-progress {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 80;
-    width: 100%;
-    height: 3px;
-    background: linear-gradient(
-      90deg,
-      var(--accent),
-      var(--accent-2),
-      var(--gold)
-    );
-    transform: scaleX(0);
-    transform-origin: left center;
-    pointer-events: none;
-  }
-
   .section-pad {
     position: relative;
     width: min(1180px, calc(100% - 32px));
@@ -959,15 +687,22 @@ const lang = locale === "es" ? "es" : "en";
   }
 
   .hero {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    min-height: 100vh;
+  }
+
+  .hero-inner {
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: auto;
+    min-height: 100vh;
     padding-top: 140px;
-    padding-bottom: 40px;
+    padding-bottom: 80px;
     perspective: 1000px;
     position: relative;
-    overflow: hidden;
+    z-index: 1;
   }
 
   .hero-bg-shader {
@@ -975,7 +710,7 @@ const lang = locale === "es" ? "es" : "en";
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    opacity: 0.8;
+    opacity: 0.75;
   }
 
   .hero-content,
@@ -999,16 +734,61 @@ const lang = locale === "es" ? "es" : "en";
     opacity: 0;
   }
 
+  /* hero-title hidden state — managed independently (not via .reveal) */
+  .hero-title {
+    opacity: 0;
+  }
+
   .device-mockup {
     opacity: 0;
   }
 
   @media (prefers-reduced-motion: reduce) {
     .reveal,
+    .hero-title,
+    .problem-title,
     .device-mockup {
       opacity: 1 !important;
       transform: none !important;
     }
+  }
+
+  /* spring-scale-in word units */
+  .hero-title .text-animation-unit {
+    display: inline-block;
+    white-space: pre;
+    backface-visibility: hidden;
+    transform-origin: 50% 55%;
+    will-change: transform, opacity;
+  }
+
+  /* scroll-reveal text section */
+  .scroll-reveal-text {
+    font-family: "Instrument Serif", serif;
+    font-size: clamp(1.5rem, 3.5vw, 3rem);
+    font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    max-width: 900px;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .sr-word {
+    display: inline-block;
+    opacity: 0.15;
+    transform: translateY(8px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  .sr-word.sr-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sr-word { opacity: 1; transform: none; transition: none; }
   }
 
   .hero-actions {
@@ -1036,6 +816,7 @@ const lang = locale === "es" ? "es" : "en";
     line-height: 0.94;
     max-width: 840px;
     font-size: clamp(2rem, 5.75vw, 5.75rem);
+    margin: 0 auto;
   }
 
   .section-title {
@@ -1047,14 +828,13 @@ const lang = locale === "es" ? "es" : "en";
 
   .hero-body,
   .section-body {
-    color: var(--muted);
     font-size: clamp(1.05rem, 1.5vw, 1.25rem);
     line-height: 1.7;
   }
 
   .hero-body {
     max-width: 690px;
-    margin: 28px 0 0;
+    margin: 28px auto 0;
   }
 
   .hero-actions {
@@ -1257,6 +1037,27 @@ const lang = locale === "es" ? "es" : "en";
     max-width: 930px;
     margin: 0 auto 54px;
     text-align: center;
+  }
+
+  .features.section-pad {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .features-section-title {
+    font-size: clamp(1.8rem, 3.5vw, 3.8rem);
+    font-weight: 400;
+    opacity: 0;
+  }
+
+
+
+  .features-highlight {
+    font-family: "Instrument Serif", serif;
+    font-style: italic;
+    color: #818cf8;
   }
 
   .problem-cards,
@@ -1470,7 +1271,6 @@ const lang = locale === "es" ? "es" : "en";
   }
 
   @media (max-width: 980px) {
-    .hero,
     .section-grid,
     .faq,
     .waitlist-card {
@@ -1486,7 +1286,7 @@ const lang = locale === "es" ? "es" : "en";
       direction: ltr;
     }
 
-    .hero {
+    .hero-inner {
       gap: 50px;
     }
 
@@ -1519,9 +1319,10 @@ const lang = locale === "es" ? "es" : "en";
       padding: 86px 0;
     }
 
-    .hero {
+    .hero-inner {
       padding-top: 100px;
       padding-bottom: 40px;
+      min-height: auto;
     }
 
     .hero-content {
