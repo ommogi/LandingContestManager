@@ -1,0 +1,190 @@
+---
+const steps = [
+  { title: "Crea el concurso",     description: "Define la estructura general y las categorías.",             content: "/mockups/Pasos/Crear_concurso.png" },
+  { title: "Carga participantes",  description: "Crea inscripciones o importa datos mediante CSV.",            content: "/mockups/Pasos/Carga_participantes.png" },
+  { title: "Asigna jurados",       description: "Configura quién evalúa cada categoría y ronda.",             content: "/mockups/Pasos/Asignar_jurados.png" },
+  { title: "Gestiona rondas",      description: "Controla puntuaciones, medias y pases de ronda.",            content: "/mockups/Pasos/Gestionar_rondas.png" },
+  { title: "Ordena el calendario", description: "Programa ensayos y actuaciones con lugar y hora.",           content: "/mockups/Pasos/Ordenar_calendario.png" },
+];
+---
+
+<section class="flow-panels">
+  <div class="flow-panels-viewport">
+    {steps.map((item, i) => (
+      <div class="flow-panel" data-panel={i} style={{
+        backgroundImage: `
+          radial-gradient(ellipse 120% 80% at 70% 20%, rgba(255, 20, 147, 0.15), transparent 50%),
+          radial-gradient(ellipse 100% 60% at 30% 10%, rgba(0, 255, 255, 0.12), transparent 60%),
+          radial-gradient(ellipse 90% 70% at 50% 0%, rgba(138, 43, 226, 0.18), transparent 65%),
+          radial-gradient(ellipse 110% 50% at 80% 30%, rgba(255, 215, 0, 0.08), transparent 40%),
+          #000000
+        `,
+      }}
+      >
+        <div class="flow-panel-inner">
+          <div class="flow-panel-text">
+            <span class="flow-panel-number">0{i + 1}</span>
+            <h2 class="flow-panel-title">{item.title}</h2>
+            <p class="flow-panel-desc">{item.description}</p>
+          </div>
+          <div class="flow-panel-media">
+            {item.content.match(/\.(mov|mp4|webm)$/i) ? (
+              <video src={item.content} autoplay muted loop playsinline />
+            ) : (
+              <img src={item.content} alt={item.title} loading="lazy" />
+            )}
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+<style>
+  .flow-panels {
+    position: relative;
+  }
+
+  .flow-panels-viewport {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateZ(0);
+    will-change: transform;
+  }
+
+  .flow-panel {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(24px, 5vw, 80px);
+    will-change: transform, opacity;
+  }
+
+  .flow-panel-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    width: min(1200px, calc(100% - 48px));
+  }
+
+  .flow-panel-number {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  .flow-panel-title {
+    font-family: "Instrument Serif", serif;
+    font-size: clamp(2.2rem, 4.5vw, 4rem);
+    font-weight: 400;
+    letter-spacing: -0.04em;
+    line-height: 1.1;
+    margin: 0 0 20px;
+  }
+
+  .flow-panel-desc {
+    font-size: clamp(1rem, 1.3vw, 1.2rem);
+    line-height: 1.7;
+    color: var(--muted);
+    margin: 0;
+  }
+
+  .flow-panel-media {
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 32px 64px rgba(0, 0, 0, 0.4);
+    background: var(--panel);
+  }
+
+  .flow-panel-media img,
+  .flow-panel-media video {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  @media (max-width: 980px) {
+    .flow-panel-inner {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    .flow-panel-media {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  function initFlowPanels() {
+    const container = document.querySelector(".flow-panels") as HTMLElement;
+    const panels = gsap.utils.toArray<HTMLElement>(".flow-panel");
+
+    if (!container || panels.length <= 1) return;
+
+    // Estirar el contenedor para generar espacio de scroll
+    // +1 = 100vh extra de dwell en el último panel antes de soltar la sección
+    const dwell = 1;
+    container.style.height = (panels.length * 100 + dwell * 100) + "vh";
+
+    // Estado inicial: primero visible, resto ocultos
+    gsap.set(panels[0], { scale: 1, autoAlpha: 1 });
+    gsap.set(panels.slice(1), { scale: 0.8, autoAlpha: 0 });
+
+    let activeIndex = 0;
+    gsap.defaults({ overwrite: "auto", duration: 0.25 });
+
+    function showPanel(index: number) {
+      if (index === activeIndex) return;
+      gsap.set(panels[activeIndex], { scale: 0.85, autoAlpha: 0 });
+      gsap.fromTo(
+        panels[index],
+        { scale: 0.85, autoAlpha: 0 },
+        { scale: 1, autoAlpha: 1, duration: 0.25, ease: "power2.out" }
+      );
+      activeIndex = index;
+    }
+
+    function getContainerOffset() {
+      return container.getBoundingClientRect().top + window.scrollY;
+    }
+
+    ScrollTrigger.create({
+      start: () => getContainerOffset(),
+      end: () => getContainerOffset() + (panels.length + dwell) * innerHeight,
+      invalidateOnRefresh: true,
+      onUpdate: (self) => {
+        const p = Math.min(1, self.progress * (panels.length + dwell) / panels.length);
+        const target = Math.min(panels.length - 1, Math.floor(p * panels.length));
+        showPanel(target);
+      },
+      onLeaveBack: () => showPanel(0),
+    });
+
+    ScrollTrigger.refresh();
+  }
+
+  if (document.readyState === "complete") {
+    initFlowPanels();
+  } else {
+    window.addEventListener("load", initFlowPanels);
+  }
+</script>
