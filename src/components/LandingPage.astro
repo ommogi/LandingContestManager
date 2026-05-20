@@ -1,17 +1,16 @@
 ---
 import CookieConsent from "./CookieConsent.astro";
 import FaqSection from "./FaqSection.astro";
-import FeaturesWithPanel from "./features-with-panel.tsx";
+import FeaturesWithPanel from "./FeaturesWithPanel.astro";
 import FlowPanelsSection from "./FlowPanelsSection.astro";
 import HeroSection from "./HeroSection.astro";
 import LandingFooter from "./LandingFooter.astro";
 import LandingHeader from "./LandingHeader.astro";
 import PricingSection from "./PricingSection.astro";
 import ProblemSection from "./ProblemSection.astro";
+import StatsSection from "./StatsSection.astro";
 import ScreenSplitSection from "./ScreenSplitSection.astro";
 import WaitlistSection from "./WaitlistSection.astro";
-import 'animate.css';
-
 ---
 
 <!doctype html>
@@ -23,13 +22,21 @@ import 'animate.css';
     <link rel="icon" type="image/svg+xml" href="/contestmanager-logo.svg" />
     <link rel="icon" type="image/png" href="/contest-manager-logo.png" />
     <meta name="description" content="ContestManager ayuda a organizaciones musicales a gestionar concursos, rondas, jurados, participantes, ensayos y actuaciones sin depender de Excel." />
-    <link rel="canonical" href="/" />
+    <link rel="canonical" href="https://contestmanager.app/" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
+      rel="preload"
+      as="style"
       href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Figtree:wght@400;500;600;700;800;900&display=swap"
-      rel="stylesheet"
+      onload="this.onload=null;this.rel='stylesheet'"
     />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Figtree:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
   </head>
   <body>
     <div class="noise" aria-hidden="true"></div>
@@ -46,13 +53,12 @@ import 'animate.css';
         <h2 class="section-title features-section-title centered">
           Todo lo que necesita una organización musical para competir sin <span class="features-highlight">caos</span>.
         </h2>
-        <FeaturesWithPanel client:only="react" />
+        <FeaturesWithPanel />
       </section>
       <ScreenSplitSection
         section={{ label: "Categorías", title: "Estructura el concurso exactamente como lo necesitas.", body: "Crea categorías por modalidad, edad o nivel. Cada una tiene sus propias rondas, jurados asignados y participantes inscritos. Sin mezclas ni confusión." }}
         imageSrc="/mockups/Creacion_concurso.mov"
         imageAlt="Creación de concurso"
-        cta="Entrar en lista blanca"
         isVideo
       />
       <ScreenSplitSection
@@ -60,24 +66,22 @@ import 'animate.css';
         imageSrc="/mockups/Control_notas.mov"
         imageAlt="Control de notas"
         reverse
-        cta="Entrar en lista blanca"
         isVideo
       />
       <FlowPanelsSection />
       <ScreenSplitSection
         section={{ label: "Auditoría", title: "Modificar una nota no debería significar perder confianza.", body: "El administrador puede ajustar puntuaciones y medias cuando sea necesario, pero los cambios quedan guardados para saber qué se modificó y mantener transparencia durante el concurso." }}
-        imageSrc="/screens/audit.svg"
+        imageSrc="/mockups/Notas_Jurado.png"
         imageAlt="Audit trail placeholder"
-        cta="Entrar en lista blanca"
       />
       <ScreenSplitSection
         section={{ label: "Calendario", title: "Ensayos y actuaciones, visibles en un solo lugar.", body: "Cada ronda puede tener sus propios ensayos y actuaciones, con hora y ubicación. El organizador ve el calendario completo sin cruzar hojas de cálculo ni mensajes sueltos." }}
-        imageSrc="/screens/calendar.svg"
+        imageSrc="/mockups/Calendario_global.png"
         imageAlt="Calendar placeholder"
         reverse
-        cta="Entrar en lista blanca"
       />
       <PricingSection />
+      <StatsSection />
       <FaqSection />
       <WaitlistSection />
     </main>

@@ -1,0 +1,141 @@
+---
+const stats = [
+  { label: "Tiempo de gestión por concurso",        from: 0,  to: 80,  prefix: "-", suffix: "%"   },
+  { label: "Errores por versiones desactualizadas",  from: 48, to: 0,   prefix: "",  suffix: ""    },
+  { label: "Para montar una categoría completa",     from: 0,  to: 5,   prefix: "",  suffix: " min" },
+  { label: "Cambios auditables con usuario y fecha", from: 0,  to: 100, prefix: "",  suffix: "%"   },
+];
+---
+
+<section id="estadisticas" class="stats section-pad">
+  <h2 class="title section-title centered reveal">Números que respaldan la plataforma.</h2>
+
+  <div class="stats-grid">
+    {stats.map((s, i) => (
+      <div class="stat-widget" data-from={String(s.from)} data-to={String(s.to)} data-prefix={s.prefix} data-suffix={s.suffix}>
+        <span class="stat-value" id={`stat-val-${i}`}>{s.prefix}{s.from}{s.suffix}</span>
+        <span class="stat-label">{s.label}</span>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .title {
+    font-size: clamp(1.8rem, 3.5vw, 3.8rem);
+    font-weight: 400;
+  }
+  .stats {
+    text-align: center;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    max-width: 900px;
+    margin: 60px auto 0;
+  }
+
+  .stat-widget {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 40px 24px;
+    border-right: 1px dashed rgba(255, 255, 255, 0.18);
+  }
+
+  .stat-widget:last-child {
+    border-right: none;
+  }
+
+  .stat-value {
+    font-family: "Figtree", sans-serif;
+    font-weight: 900;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    color: var(--accent);
+    line-height: 1;
+    display: block;
+  }
+
+  .stat-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    line-height: 1.4;
+    max-width: 140px;
+  }
+
+  @media (max-width: 768px) {
+    .stats-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* col 2 of each row has no right border */
+    .stat-widget:nth-child(2n) {
+      border-right: none;
+    }
+
+    /* restore right border on col 1 items */
+    .stat-widget:nth-child(2n+1) {
+      border-right: 1px dashed rgba(255, 255, 255, 0.18);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .stats-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .stat-widget {
+      border-right: none;
+    }
+  }
+</style>
+
+<script>
+  function easeOutQuart(t: number): number {
+    return 1 - Math.pow(1 - t, 4);
+  }
+
+  function animateCount(el: HTMLElement, from: number, to: number, prefix: string, suffix: string, duration: number = 1800) {
+    const start = performance.now();
+    const forward = to >= from;
+
+    function tick(now: number) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = easeOutQuart(progress);
+      const current = Math.round(from + (to - from) * eased);
+      el.textContent = `${prefix}${current}${suffix}`;
+      if (progress < 1) requestAnimationFrame(tick);
+    }
+
+    requestAnimationFrame(tick);
+  }
+
+  const widgets = document.querySelectorAll('.stat-widget');
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const widget = entry.target as HTMLElement;
+        const valEl = widget.querySelector('.stat-value') as HTMLElement;
+        if (!valEl) return;
+
+        const from   = Number(widget.dataset.from ?? 0);
+        const to     = Number(widget.dataset.to ?? 0);
+        const prefix = widget.dataset.prefix ?? '';
+        const suffix = widget.dataset.suffix ?? '';
+
+        animateCount(valEl, from, to, prefix, suffix);
+        observer.unobserve(widget);
+      });
+    },
+    { threshold: 0.3 }
+  );
+
+  widgets.forEach((w) => observer.observe(w));
+</script>
