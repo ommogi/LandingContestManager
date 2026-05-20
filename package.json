@@ -11,7 +11,7 @@
   "dependencies": {
     "@astrojs/react": "^5.0.4",
     "@astrojs/sitemap": "^3.3.1",
-    "@astrojs/vercel": "^7.8.2",
+    "@astrojs/vercel": "^8.2.11",
     "@hugeicons/core-free-icons": "^4.1.1",
     "@hugeicons/react": "^1.1.6",
     "@paper-design/shaders-react": "^0.0.76",
