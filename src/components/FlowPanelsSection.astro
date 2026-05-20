@@ -29,9 +29,11 @@ const steps = [
           </div>
           <div class="flow-panel-media">
             {item.content.match(/\.(mov|mp4|webm)$/i) ? (
-              <video src={item.content} autoplay muted loop playsinline />
+              <video src={item.content} autoplay muted loop playsinline>
+                <track kind="captions" src="/captions/empty.vtt" srclang="es" label="Español" default />
+              </video>
             ) : (
-              <img src={item.content} alt={item.title} loading="lazy" />
+              <img src={item.content} alt={item.title} loading="lazy" width="2940" height="1604" decoding="async" />
             )}
           </div>
         </div>

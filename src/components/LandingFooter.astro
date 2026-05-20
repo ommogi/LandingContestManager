@@ -6,9 +6,9 @@ const links = {
     { label: "Membresía", href: "#precios" },
   ],
   social: [
-    { label: "YouTube", href: "#" },
-    { label: "Instagram", href: "#" },
-    { label: "LinkedIn", href: "#" },
+    { label: "YouTube",   href: "https://www.youtube.com/@contestmanager" },
+    { label: "Instagram", href: "https://www.instagram.com/contestmanager" },
+    { label: "LinkedIn",  href: "https://www.linkedin.com/company/contestmanager" },
   ],
   legal: [
     { label: "Aviso legal", href: "/aviso-legal" },
@@ -41,7 +41,7 @@ const copy = {
       <div class="links-column">
         {
           links.social.map((link) => (
-            <a href={link.href} class="footer-link">
+            <a href={link.href} class="footer-link" target="_blank" rel="noopener noreferrer">
               {link.label}
             </a>
           ))

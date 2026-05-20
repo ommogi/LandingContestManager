@@ -19,7 +19,7 @@ const { section, imageSrc, imageAlt, reverse = false, cta, isVideo = false } = A
   <div class="feature-split-inner">
     <div class="feature-split-copy" data-split-copy>
       <span class="feature-badge reveal">{section.label}</span>
-      <h2 class="feature-split-title reveal">{section.title}</h2>
+      <h2 class="title feature-split-title reveal">{section.title}</h2>
       <p class="feature-split-body reveal">{section.body}</p>
       {cta && <a href="#lista-blanca" class="button split-cta reveal">{cta}</a>}
     </div>
@@ -27,10 +27,17 @@ const { section, imageSrc, imageAlt, reverse = false, cta, isVideo = false } = A
       {isVideo ? (
         <video autoplay muted loop playsinline preload="metadata" poster="/mockups/Categorias.png">
           <source src={imageSrc} type="video/mp4" />
+          <track kind="captions" src="/captions/empty.vtt" srclang="es" label="Español" default />
         </video>
       ) : (
-        <img src={imageSrc} alt={imageAlt} loading="lazy" />
+        <img src={imageSrc} alt={imageAlt} loading="lazy" width="2940" height="1604" decoding="async" />
       )}
     </div>
   </div>
 </section>
+<style>
+  .title {
+    font-size: clamp(1.8rem, 3.5vw, 3.8rem);
+    font-weight: 400;
+  }
+</style>
