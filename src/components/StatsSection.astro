@@ -41,7 +41,7 @@ const stats = [
     flex-direction: column;
     align-items: center;
     gap: 10px;
-    padding: 40px 24px;
+    padding: 24px 20px;
     border-right: 1px dashed rgba(255, 255, 255, 0.18);
   }
 
@@ -93,7 +93,9 @@ const stats = [
       grid-template-columns: 1fr;
     }
 
-    .stat-widget {
+    /* override higher-specificity nth-child rule from 768px query */
+    .stat-widget,
+    .stat-widget:nth-child(2n+1) {
       border-right: none;
       border-bottom: 1px dashed rgba(255, 255, 255, 0.18);
     }

@@ -256,23 +256,31 @@ const copy = {
 
   @media (max-width: 480px) {
     .footer-content {
-      padding: 40px 20px 24px;
-      gap: 28px;
+      padding: 32px 20px 24px;
+      gap: 20px;
     }
 
-    .links-grid {
-      grid-template-columns: 1fr;
-      gap: 12px;
-    }
-
+    /* CTA first, links below */
     .footer-cta {
-      display: inline-block;
-      padding: 12px 24px;
-      border: 1px solid rgba(255, 255, 255, 0.3);
+      order: -1;
+      display: block;
+      padding: 13px 24px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
       border-radius: 8px;
-      width: 100%;
       text-align: center;
+      width: 100%;
       box-sizing: border-box;
+    }
+
+    /* Keep 3 columns side by side — compact */
+    .links-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      width: 100%;
+    }
+
+    .footer-link {
+      font-size: 13px;
     }
 
     .big-text {
