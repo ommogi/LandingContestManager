@@ -72,14 +72,19 @@ const stats = [
       grid-template-columns: repeat(2, 1fr);
     }
 
-    /* col 2 of each row has no right border */
+    /* col 2 of each row: no right border */
     .stat-widget:nth-child(2n) {
       border-right: none;
     }
 
-    /* restore right border on col 1 items */
+    /* col 1 items: restore right border */
     .stat-widget:nth-child(2n+1) {
       border-right: 1px dashed rgba(255, 255, 255, 0.18);
+    }
+
+    /* first row: add bottom separator */
+    .stat-widget:nth-child(-n+2) {
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.18);
     }
   }
 
@@ -90,6 +95,11 @@ const stats = [
 
     .stat-widget {
       border-right: none;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.18);
+    }
+
+    .stat-widget:last-child {
+      border-bottom: none;
     }
   }
 </style>

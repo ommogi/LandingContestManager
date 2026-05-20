@@ -342,6 +342,10 @@
   .staggered-menu-wrapper[data-open] .sm-logo-img {
     filter: invert(100%);
   }
+
+  .staggered-menu-wrapper[data-open] .sm-logo {
+    display: none;
+  }
 }
 
 @media (max-width: 640px) {
@@ -353,5 +357,9 @@
 
   .staggered-menu-wrapper[data-open] .sm-logo-img {
     filter: invert(100%);
+  }
+
+  .staggered-menu-wrapper[data-open] .sm-logo {
+    display: none;
   }
 }
