@@ -344,7 +344,7 @@
   }
 
   .staggered-menu-wrapper[data-open] .sm-logo {
-    display: none;
+    visibility: hidden;
   }
 }
 
@@ -360,6 +360,6 @@
   }
 
   .staggered-menu-wrapper[data-open] .sm-logo {
-    display: none;
+    visibility: hidden;
   }
 }
