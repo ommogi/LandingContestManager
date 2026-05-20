@@ -12,7 +12,7 @@ export default defineConfig({
   vite: {
     assetsInclude: ['**/*.glb', '**/*.png'],
     resolve: {
-      dedupe: ['react', 'react-dom'],
+      dedupe: ['react', 'react-dom', 'react/jsx-runtime', 'react/jsx-dev-runtime'],
     },
   }
 });
