@@ -1,5 +1,5 @@
 ---
-import { FeatureCardsGrid } from './FeatureCardsGrid';
+import FeatureCardsGrid from './FeatureCardsGrid.astro';
 ---
 
 <script>
@@ -73,14 +73,7 @@ document.fonts.ready.then(() => {
   
 
   <div class="text">
-    <FeatureCardsGrid
-      cards={[
-        ["Sin duplicados", "Una fuente de verdad para cada categoría y ronda."],
-        ["Control administrativo", "El organizador decide cuándo avanzar y cuántos pasan."],
-        ["Historial visible", "Los cambios relevantes quedan registrados para consulta."],
-      ]}
-      client:load
-    />
+    <FeatureCardsGrid />
   </div>
 </section>
 

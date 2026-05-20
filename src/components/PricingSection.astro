@@ -1,12 +1,12 @@
 ---
-import PricingHighlight from './PricingHighlight';
+import PricingHighlight from './PricingHighlight.astro';
 
 const ICON_KEYS = ['ticket', 'clipboard', 'shield'] as const;
 
 const rawCards: [string, string, string][] = [
   ["Tickets",                  "1 euro por ticket",      "Cada inscripción creada o importada mediante CSV consume un ticket."],
-  ["Inscripciones gestionadas","5% por inscripción",     "Si usas la gestión de inscripciones de la aplicación, pagas una comisión del 5%."],
   ["Lista blanca",             "5% de descuento",        "Los primeros interesados reciben un 5% de descuento en su primera compra."],
+  ["Inscripciones gestionadas","5% por inscripción",     "Si usas la gestión de inscripciones de la aplicación, pagas una comisión del 5%."],
 ];
 
 const cards = rawCards.map(([cardTitle, price, text], i) => ({
@@ -17,11 +17,11 @@ const cards = rawCards.map(([cardTitle, price, text], i) => ({
 ---
 
 <section id="precios" class="pricing section-pad">
-  <h2 class="title section-title centered no-margin">
-    <span class="pay-highlight">Pay as you go</span>
+  <h2 class="title section-title centered no-margin" aria-label="Pay as you go">
+    <span class="pay-highlight" aria-hidden="true">Pay as you go</span>
   </h2>
   <h2 class="title section-title centered reveal">Pensado para concursos de cualquier tamaño.</h2>
-  <PricingHighlight cards={cards} client:visible />
+  <PricingHighlight cards={cards} />
 </section>
 
 <style>

@@ -1,0 +1,190 @@
+---
+interface Props {
+  cards: { title: string; description: string[]; iconKey: "ticket" | "clipboard" | "shield" }[];
+}
+const { cards } = Astro.props;
+
+const ICONS: Record<string, string> = {
+  ticket: `<path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2"/><path d="M13 17v2"/><path d="M13 11v2"/>`,
+  clipboard: `<rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/>`,
+  shield: `<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/>`,
+};
+---
+
+<div class="pricing-grid">
+  {cards.map((card, i) => {
+    const isAccent = i === 1;
+    return (
+      <div class:list={["vercel-card", isAccent && "vercel-card--accent"]}>
+        <span class="corner corner--tl"></span>
+        <span class="corner corner--tr"></span>
+        <span class="corner corner--bl"></span>
+        <span class="corner corner--br"></span>
+        <div class="card-inner">
+          <svg
+            class="card-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            set:html={ICONS[card.iconKey]}
+          />
+          <p class="card-title">{card.title}</p>
+          <p class="card-price">{card.description[0]}</p>
+          <p class="card-desc">{card.description[1]}</p>
+        </div>
+      </div>
+    );
+  })}
+</div>
+
+<style>
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .vercel-card {
+    position: relative;
+    background: #050505;
+    border: 1px dashed rgba(255, 255, 255, 0.18);
+    padding: 52px 32px;
+    text-align: center;
+    transition: border-color 0.3s ease, background 0.3s ease;
+  }
+
+  .vercel-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      circle 180px at var(--x, -999px) var(--y, -999px),
+      rgba(255, 255, 255, 0.07),
+      transparent 70%
+    );
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .vercel-card:hover {
+    border-color: rgba(255, 255, 255, 0.35);
+    background: #0e0e0e;
+  }
+
+  .vercel-card:hover::before {
+    opacity: 1;
+  }
+
+  .vercel-card--accent {
+    border-color: rgba(212, 175, 55, 0.3);
+  }
+
+  .vercel-card--accent:hover {
+    border-color: rgba(212, 175, 55, 0.55);
+  }
+
+  /* corner cross markers */
+  .corner {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+  }
+
+  .corner::before,
+  .corner::after {
+    content: '';
+    position: absolute;
+    background: rgba(255, 255, 255, 0.45);
+  }
+
+  .corner::before {
+    width: 100%;
+    height: 1px;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+  }
+
+  .corner::after {
+    width: 1px;
+    height: 100%;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+  }
+
+  .corner--tl { top: -7px;    left: -7px;  }
+  .corner--tr { top: -7px;    right: -7px; }
+  .corner--bl { bottom: -7px; left: -7px;  }
+  .corner--br { bottom: -7px; right: -7px; }
+
+  /* content */
+  .card-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .card-icon {
+    width: 28px;
+    height: 28px;
+    color: rgba(255, 255, 255, 0.55);
+    margin-bottom: 4px;
+  }
+
+  .card-title {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.4);
+    margin: 0;
+  }
+
+  .card-price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 0;
+  }
+
+  .vercel-card--accent .card-price {
+    color: #d4af37;
+  }
+
+  .card-desc {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.38);
+    line-height: 1.65;
+    margin: 0;
+    max-width: 200px;
+  }
+
+  @media (max-width: 768px) {
+    .pricing-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  document.querySelectorAll('.vercel-card').forEach((card) => {
+    const el = card as HTMLElement;
+    el.addEventListener('mousemove', (e) => {
+      const rect = el.getBoundingClientRect();
+      el.style.setProperty('--x', `${(e as MouseEvent).clientX - rect.left}px`);
+      el.style.setProperty('--y', `${(e as MouseEvent).clientY - rect.top}px`);
+    });
+    el.addEventListener('mouseleave', () => {
+      el.style.setProperty('--x', '-999px');
+      el.style.setProperty('--y', '-999px');
+    });
+  });
+</script>

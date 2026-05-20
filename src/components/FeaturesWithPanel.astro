@@ -1,0 +1,253 @@
+---
+const items = [
+  { title: "Categorías flexibles",  description: "Organiza participantes, jurados y rondas por modalidad, edad o nivel.",           content: "/mockups/Categorias.png",                isVideo: false },
+{ title: "Jurados y notas",       description: "Introduce, revisa y corrige puntuaciones con medias centralizadas.",                content: "/mockups/Notas_Jurado.png",             isVideo: false  },
+  { title: "Pase de ronda",         description: "Define cuántos participantes avanzan y ejecuta la decisión desde administración.", content: "/mockups/Pase_de_ronda.png",             isVideo: false },
+  { title: "Importación CSV",       description: "Crea inscripciones desde archivos CSV cuando la organización ya tiene datos.",     content: "/mockups/Importacion_CSV.png",           isVideo: false },
+  { title: "Ensayos y actuaciones", description: "Asigna hora, sala y ronda para cada ensayo o actuación.",                         content: "/mockups/Ensayos_y_actuaciones.png",     isVideo: false },
+  { title: "Calendario global",     description: "Consulta todos los eventos de tus concursos desde una vista ordenada.",           content: "/mockups/Calendario_global.png",          isVideo: false },
+];
+---
+
+<section class="features-panel-section">
+  <div class="fp-inner">
+    <div class="fp-grid">
+
+      <!-- list -->
+      <ul class="fp-list" id="fp-list">
+        {items.map((item, i) => (
+          <li
+            class="fp-item"
+            data-index={i}
+            data-active={i === 0 ? "true" : undefined}
+          >
+            <div class="fp-row">
+              <span class="fp-num">{i + 1}</span>
+              <span class="fp-title">{item.title}</span>
+            </div>
+            <!-- mobile panel -->
+            <div class="fp-mobile-panel">
+              <div class="fp-media-wrap">
+                {item.isVideo
+                  ? (
+                    <video src={item.content} autoplay muted loop playsinline class="fp-media">
+                      <track kind="captions" src="/captions/empty.vtt" srclang="es" label="Español" default />
+                    </video>
+                  )
+                  : <img src={item.content} alt={item.title} class="fp-media" loading="lazy" width="2940" height="1598" decoding="async" />
+                }
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
+
+      <!-- desktop sticky panel -->
+      <div class="fp-desktop-panel">
+        <div class="fp-desktop-wrap">
+          {items.map((item, i) => (
+            <div
+              class="fp-panel"
+              data-index={i}
+              style={i === 0 ? "opacity:1;pointer-events:auto" : "opacity:0;pointer-events:none"}
+            >
+              {item.isVideo
+                ? (
+                  <video src={item.content} autoplay muted loop playsinline class="fp-media">
+                    <track kind="captions" src="/captions/empty.vtt" srclang="es" label="Español" default />
+                  </video>
+                )
+                : <img src={item.content} alt={item.title} class="fp-media" loading="lazy" width="2940" height="1598" decoding="async" />
+              }
+            </div>
+          ))}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .features-panel-section {
+    position: relative;
+    width: 100%;
+    padding: 0 0 96px;
+  }
+
+  .fp-inner {
+    max-width: 1152px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .fp-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  @media (min-width: 1024px) {
+    .fp-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+  }
+
+  /* list */
+  .fp-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .fp-item {
+    display: flex;
+    flex-direction: column;
+    padding: 14px 16px;
+    border-radius: 12px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+
+  .fp-item[data-active] {
+    border-color: var(--accent);
+    background: var(--panel-soft, rgba(255,255,255,0.04));
+  }
+
+  .fp-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .fp-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 500;
+    flex-shrink: 0;
+    background: var(--panel-soft, rgba(255,255,255,0.06));
+    color: var(--muted);
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+
+  .fp-item[data-active] .fp-num {
+    background: var(--accent);
+    color: #081009;
+  }
+
+  .fp-title {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--muted);
+    transition: color 0.2s ease;
+  }
+
+  .fp-item[data-active] .fp-title {
+    color: var(--text);
+  }
+
+  /* mobile panel (under each item) */
+  .fp-mobile-panel {
+    width: 100%;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.35s ease;
+  }
+
+  .fp-media-wrap {
+    width: 100%;
+    margin-top: 12px;
+    overflow: hidden;
+    border-radius: 12px;
+    border: 1px solid var(--line, rgba(255,255,255,0.1));
+    background: var(--panel, #0d1117);
+    aspect-ratio: 4 / 3;
+  }
+
+  .fp-media {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* desktop panel */
+  .fp-desktop-panel {
+    display: none;
+  }
+
+  @media (min-width: 1024px) {
+    .fp-desktop-panel {
+      display: block;
+      position: sticky;
+      top: 40px;
+    }
+
+    .fp-mobile-panel {
+      display: none !important;
+    }
+  }
+
+  .fp-desktop-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border-radius: 12px;
+    border: 1px solid var(--line, rgba(255,255,255,0.1));
+    background: var(--panel, #0d1117);
+  }
+
+  .fp-panel {
+    position: absolute;
+    inset: 0;
+    transition: opacity 0.3s ease;
+  }
+</style>
+
+<script>
+  const listItems = document.querySelectorAll('.fp-item');
+  const panels = document.querySelectorAll('.fp-panel');
+  let activeIdx = 0;
+
+  function setActive(i: number) {
+    if (i === activeIdx) return;
+
+    // deactivate old
+    listItems[activeIdx].removeAttribute('data-active');
+    const oldMobile = listItems[activeIdx].querySelector('.fp-mobile-panel') as HTMLElement;
+    if (oldMobile) oldMobile.style.maxHeight = '0';
+
+    // activate new
+    activeIdx = i;
+    listItems[i].setAttribute('data-active', 'true');
+    const newMobile = listItems[i].querySelector('.fp-mobile-panel') as HTMLElement;
+    if (newMobile) newMobile.style.maxHeight = newMobile.scrollHeight + 'px';
+
+    // switch desktop panels
+    panels.forEach((p, j) => {
+      const el = p as HTMLElement;
+      el.style.opacity = j === i ? '1' : '0';
+      el.style.pointerEvents = j === i ? 'auto' : 'none';
+    });
+  }
+
+  // init first mobile panel height
+  const firstMobile = listItems[0]?.querySelector('.fp-mobile-panel') as HTMLElement;
+  if (firstMobile) firstMobile.style.maxHeight = firstMobile.scrollHeight + 'px';
+
+  listItems.forEach((item, i) => {
+    item.addEventListener('click', () => setActive(i));
+  });
+</script>
