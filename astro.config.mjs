@@ -10,6 +10,9 @@ export default defineConfig({
   site: 'https://contestmanager.app',
   integrations: [sitemap(), react(), tailwind()],
   vite: {
+    ssr: {
+      noExternal: ['gsap'],
+    },
     assetsInclude: ['**/*.glb', '**/*.png'],
     resolve: {
       dedupe: ['react', 'react-dom', 'react/jsx-runtime', 'react/jsx-dev-runtime'],
