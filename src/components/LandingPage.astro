@@ -37,6 +37,14 @@ import WaitlistSection from "./WaitlistSection.astro";
         rel="stylesheet"
       />
     </noscript>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CRBW2PJRR2"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-CRBW2PJRR2');
+    </script>
   </head>
   <body>
     <div class="noise" aria-hidden="true"></div>
